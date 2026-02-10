@@ -183,7 +183,7 @@ export default function Hero() {
                   </div>
                   <div className="flex gap-2 justify-center">
                     <a
-                      href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://www.repowise.ai?ref=${result.referralCode}`)}`}
+                      href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://www.repowise.ai?ref=${result.referralCode}`)}&summary=${encodeURIComponent("🚀 Just discovered RepoWise — the context engine for AI coding assistants.\n\nThe problem: AI tools read your code but miss the WHY. Architecture decisions, patterns, team conventions — all invisible.\n\nThe solution: RepoWise generates a context layer that lives in your repo and auto-syncs on every commit.\n\nJoined the waitlist 👇")}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => trackClick("referral_linkedin")}
@@ -193,7 +193,7 @@ export default function Hero() {
                       LinkedIn
                     </a>
                     <a
-                      href={`https://twitter.com/intent/tweet?text=${encodeURIComponent("Just joined the waitlist for RepoWise - AI-ready codebase documentation that auto-syncs with your code! 🚀")}&url=${encodeURIComponent(`https://www.repowise.ai?ref=${result.referralCode}`)}`}
+                      href={`https://twitter.com/intent/tweet?text=${encodeURIComponent("🧠 Your AI assistant reads code but doesn't understand it.\n\nRepoWise fixes that — it's a context engine that generates the missing layer between your codebase and AI.\n\nAuto-syncs on every commit. Every AI tool gets it.\n\nWaitlist is open 👇")}&url=${encodeURIComponent(`https://www.repowise.ai?ref=${result.referralCode}`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => trackClick("referral_twitter")}

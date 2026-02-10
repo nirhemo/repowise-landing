@@ -141,7 +141,7 @@ export default function WaitlistCTA({
                       LinkedIn
                     </a>
                     <a
-                      href={`https://twitter.com/intent/tweet?text=${encodeURIComponent("Just joined the waitlist for RepoWise - AI-ready codebase documentation! 🚀")}&url=${encodeURIComponent(`https://www.repowise.ai?ref=${result.referralCode}`)}`}
+                      href={`https://twitter.com/intent/tweet?text=${encodeURIComponent("🧠 Your AI assistant reads code but doesn't understand it.\n\nRepoWise fixes that — it's a context engine that generates the missing layer between your codebase and AI.\n\nWaitlist is open 👇")}&url=${encodeURIComponent(`https://www.repowise.ai?ref=${result.referralCode}`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => trackClick(`referral_twitter_${location}`)}
