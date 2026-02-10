@@ -11,13 +11,31 @@
       <stop offset="70%" style="stop-color:#A855F7"/>
       <stop offset="100%" style="stop-color:#7C3AED"/>
     </radialGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
-  <g stroke="url(#iconGradient)" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  
+  <!-- Outer hexagonal frame with curly braces -->
+  <g stroke="url(#iconGradient)" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Left curly brace integrated into hexagon -->
     <path d="M 65 35 L 45 55 Q 35 70 45 85 L 55 100 L 45 115 Q 35 130 45 145 L 65 165"/>
+    
+    <!-- Right curly brace integrated into hexagon -->
     <path d="M 135 35 L 155 55 Q 165 70 155 85 L 145 100 L 155 115 Q 165 130 155 145 L 135 165"/>
+    
+    <!-- Top connectors -->
     <path d="M 65 35 L 100 20 L 135 35"/>
+    
+    <!-- Bottom connectors -->
     <path d="M 65 165 L 100 180 L 135 165"/>
   </g>
-  <circle cx="100" cy="100" r="18" fill="url(#centerGlow)"/>
-  <circle cx="100" cy="100" r="10" fill="#F0ABFC" opacity="0.9"/>
+  
+  <!-- Center glowing dot -->
+  <circle cx="100" cy="100" r="15" fill="url(#centerGlow)" filter="url(#glow)"/>
+  <circle cx="100" cy="100" r="8" fill="#F0ABFC" opacity="0.8"/>
 </svg>
