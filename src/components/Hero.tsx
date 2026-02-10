@@ -221,7 +221,7 @@ export default function Hero() {
                       transition={{ delay: 0.2 }}
                       className="text-slate-500 text-sm pl-5"
                     >
-                      Generated 12 context files for your codebase
+                      Generated context files for your codebase
                     </motion.div>
                     <motion.div
                       initial={{ opacity: 0 }}

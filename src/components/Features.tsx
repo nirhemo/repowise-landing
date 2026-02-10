@@ -20,7 +20,7 @@ const features = [
   },
   {
     icon: FolderOpen,
-    title: "12 Context Files",
+    title: "Context Files",
     description:
       "Comprehensive coverage: architecture, patterns, tech stack, conventions, testing strategy, and more.",
     color: "secondary",
