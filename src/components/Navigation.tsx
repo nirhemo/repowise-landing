@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { trackClick } from "@/lib/analytics";
 import { useEffect, useState } from "react";
@@ -49,13 +48,11 @@ export default function Navigation() {
               whileTap={{ scale: 0.98 }}
               className="relative h-10"
             >
-              <Image
-                src="/images/logo-main.png"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/logo-main.svg"
                 alt="RepoWise"
-                width={200}
-                height={40}
-                className="h-10 w-auto object-contain"
-                priority
+                className="h-10 w-auto"
               />
             </motion.div>
           </Link>

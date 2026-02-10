@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { Heart } from "lucide-react";
-import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -20,12 +19,11 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             {/* Logo */}
             <div className="flex items-center">
-              <Image
-                src="/images/logo-footer.png"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/logo-footer.svg"
                 alt="RepoWise"
-                width={160}
-                height={40}
-                className="h-10 w-auto object-contain"
+                className="h-10 w-auto"
               />
             </div>
 

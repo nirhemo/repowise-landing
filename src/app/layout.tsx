@@ -21,12 +21,10 @@ export const metadata: Metadata = {
     "AI documentation, codebase context, AI coding assistant, developer tools, code documentation",
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "32x32" },
-      { url: "/images/favicon-64.png", sizes: "64x64", type: "image/png" },
-      { url: "/images/favicon-512.png", sizes: "512x512", type: "image/png" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
     ],
     apple: [
-      { url: "/images/favicon-180.png", sizes: "180x180", type: "image/png" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
     ],
   },
   openGraph: {
