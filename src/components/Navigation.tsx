@@ -52,7 +52,7 @@ export default function Navigation() {
               <img
                 src="/images/Logo_transperent.svg"
                 alt="RepoWise"
-                className="h-10 w-auto"
+                className="h-14 w-auto"
               />
             </motion.div>
           </Link>
@@ -65,7 +65,7 @@ export default function Navigation() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => handleNavClick(section.name)}
-                className="px-4 py-2 text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-200"
+                className="px-4 py-2 text-base font-semibold text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-200"
               >
                 {section.name}
               </motion.a>
