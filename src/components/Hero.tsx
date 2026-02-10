@@ -103,7 +103,7 @@ export default function Hero() {
             <span className="text-white">The Context Engine</span>
           </h1>
 
-          <p className="body-lg mb-10 max-w-2xl mx-auto">
+          <p className="body-lg mb-16 max-w-2xl mx-auto">
             The missing context layer between your codebase and AI. Auto-syncs on every commit.
           </p>
 
