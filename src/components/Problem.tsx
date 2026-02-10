@@ -68,7 +68,7 @@ export default function Problem() {
             <span className="text-gradient-accent">flying blind</span>
           </h2>
           <p className="body-lg max-w-2xl mx-auto">
-            Without proper context, even the smartest AI makes avoidable mistakes
+            Without the right context layer, even the smartest AI makes avoidable mistakes
           </p>
         </motion.div>
 

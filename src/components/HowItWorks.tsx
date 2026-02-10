@@ -68,7 +68,7 @@ export default function HowItWorks() {
         >
           <h2 className="heading-lg mb-5">
             Three commands.{" "}
-            <span className="text-gradient-primary">Living documentation.</span>
+            <span className="text-gradient-primary">Living context.</span>
           </h2>
           <p className="body-lg max-w-2xl mx-auto">
             Simple workflow that fits naturally into your development process

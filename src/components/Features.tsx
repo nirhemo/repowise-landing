@@ -93,8 +93,8 @@ export default function Features() {
           className="text-center mb-16"
         >
           <h2 className="heading-lg mb-5">
-            Built for AI agents,{" "}
-            <span className="text-gradient-primary">not just humans</span>
+            The context layer{" "}
+            <span className="text-gradient-primary">your AI needs</span>
           </h2>
           <p className="body-lg max-w-2xl mx-auto">
             Every feature designed to make AI coding assistants more effective

@@ -18,13 +18,16 @@ export default function Footer() {
         >
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             {/* Logo */}
-            <div className="flex items-center">
+            <div className="flex flex-col items-center md:items-start gap-2">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/Logo_transperent.svg"
                 alt="RepoWise"
                 className="h-12 w-auto"
               />
+              <p className="text-slate-500 text-sm">
+                The missing context layer between your codebase and AI
+              </p>
             </div>
 
             {/* Info */}

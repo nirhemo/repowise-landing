@@ -60,7 +60,7 @@ export default function ContextFilesPreview() {
                 <div className="flex items-center gap-2 ml-2">
                   <FolderOpen className="w-5 h-5 text-primary" />
                   <span className="font-mono text-sm text-primary font-medium">
-                    .repowise/
+                    .repowise-context/
                   </span>
                 </div>
               </div>
