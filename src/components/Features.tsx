@@ -7,6 +7,7 @@ import {
   RefreshCcw,
   ShieldCheck,
   Laptop,
+  BookOpen,
 } from "lucide-react";
 
 const features = [
@@ -39,11 +40,18 @@ const features = [
     color: "primary",
   },
   {
+    icon: BookOpen,
+    title: "Human Readable",
+    description:
+      "AI agent builds documentation that humans love to read. Clear, organized, always up-to-date.",
+    color: "secondary",
+  },
+  {
     icon: Laptop,
     title: "Runs Locally",
     description:
       "Your code never leaves your machine. Complete privacy and security by default.",
-    color: "secondary",
+    color: "accent",
   },
 ];
 
