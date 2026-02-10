@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 type WaitlistEntry = {
   email: string;
@@ -18,34 +19,62 @@ export default function AdminPage() {
   const [waitlist, setWaitlist] = useState<WaitlistEntry[]>([]);
   const [analytics, setAnalytics] = useState<AnalyticsEvent[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [authenticated, setAuthenticated] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
-    async function fetchData() {
+    // Check if authenticated
+    async function checkAuth() {
       try {
-        // Fetch waitlist
-        const wlRes = await fetch("/api/admin/waitlist");
-        if (wlRes.ok) {
-          const wlData = await wlRes.json();
-          setWaitlist(wlData.entries || []);
+        const res = await fetch("/api/admin/auth/check");
+        if (res.ok) {
+          setAuthenticated(true);
+          fetchData();
+        } else {
+          router.push("/rw-admin-x7k9m/login");
         }
-
-        // Fetch analytics
-        const anRes = await fetch("/api/admin/analytics");
-        if (anRes.ok) {
-          const anData = await anRes.json();
-          setAnalytics(anData.events || []);
-        }
-      } catch (err) {
-        setError("Failed to load data");
-        console.error(err);
-      } finally {
-        setLoading(false);
+      } catch {
+        router.push("/rw-admin-x7k9m/login");
       }
     }
 
-    fetchData();
-  }, []);
+    checkAuth();
+  }, [router]);
+
+  async function fetchData() {
+    try {
+      // Fetch waitlist
+      const wlRes = await fetch("/api/admin/waitlist");
+      if (wlRes.ok) {
+        const wlData = await wlRes.json();
+        setWaitlist(wlData.entries || []);
+      }
+
+      // Fetch analytics
+      const anRes = await fetch("/api/admin/analytics");
+      if (anRes.ok) {
+        const anData = await anRes.json();
+        setAnalytics(anData.events || []);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleLogout() {
+    await fetch("/api/admin/auth/logout", { method: "POST" });
+    router.push("/rw-admin-x7k9m/login");
+  }
+
+  if (!authenticated) {
+    return (
+      <div className="min-h-screen bg-slate-900 text-white flex items-center justify-center">
+        <p>Checking authentication...</p>
+      </div>
+    );
+  }
 
   if (loading) {
     return (
@@ -55,18 +84,18 @@ export default function AdminPage() {
     );
   }
 
-  if (error) {
-    return (
-      <div className="min-h-screen bg-slate-900 text-white flex items-center justify-center">
-        <p className="text-red-400">{error}</p>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-slate-900 text-white p-8">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">RepoWise Admin</h1>
+        <div className="flex items-center justify-between mb-8">
+          <h1 className="text-3xl font-bold">RepoWise Admin</h1>
+          <button
+            onClick={handleLogout}
+            className="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm"
+          >
+            Logout
+          </button>
+        </div>
 
         {/* Stats Overview */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
