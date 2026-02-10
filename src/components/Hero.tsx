@@ -203,7 +203,7 @@ export default function Hero() {
                   >
                     <div className="flex items-center gap-2">
                       <span className="text-secondary">✓</span>
-                      <span className="text-slate-300">Created _bmad-context/</span>
+                      <span className="text-slate-300">Created .repowise-context/</span>
                     </div>
                     <motion.div
                       initial={{ opacity: 0 }}
