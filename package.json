@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@vercel/blob": "^2.2.0",
     "better-sqlite3": "^12.6.2",
     "framer-motion": "^12.34.0",
     "lucide-react": "^0.563.0",

@@ -1,31 +1,36 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { put, list } from '@vercel/blob';
 
-const WAITLIST_FILE = path.join(process.cwd(), 'data', 'waitlist.json');
+const WAITLIST_BLOB = 'waitlist.json';
 
-// Ensure data directory exists
-function ensureDataDir() {
-  const dataDir = path.dirname(WAITLIST_FILE);
-  if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir, { recursive: true });
-  }
-}
+type WaitlistEntry = {
+  email: string;
+  timestamp: string;
+  referrer: string | null;
+};
 
-// Read waitlist
-function getWaitlist(): Array<{ email: string; timestamp: string; referrer: string | null }> {
-  ensureDataDir();
-  if (!fs.existsSync(WAITLIST_FILE)) {
+// Read waitlist from Blob
+async function getWaitlist(): Promise<WaitlistEntry[]> {
+  try {
+    const { blobs } = await list({ prefix: WAITLIST_BLOB });
+    if (blobs.length === 0) {
+      return [];
+    }
+    const response = await fetch(blobs[0].url);
+    const data = await response.json();
+    return data as WaitlistEntry[];
+  } catch (error) {
+    console.error('Error reading waitlist:', error);
     return [];
   }
-  const data = fs.readFileSync(WAITLIST_FILE, 'utf-8');
-  return JSON.parse(data);
 }
 
-// Save waitlist
-function saveWaitlist(waitlist: Array<{ email: string; timestamp: string; referrer: string | null }>) {
-  ensureDataDir();
-  fs.writeFileSync(WAITLIST_FILE, JSON.stringify(waitlist, null, 2));
+// Save waitlist to Blob
+async function saveWaitlist(waitlist: WaitlistEntry[]): Promise<void> {
+  await put(WAITLIST_BLOB, JSON.stringify(waitlist, null, 2), {
+    access: 'public',
+    addRandomSuffix: false,
+  });
 }
 
 // POST /api/waitlist - Add email to waitlist
@@ -38,7 +43,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Valid email required' }, { status: 400 });
     }
 
-    const waitlist = getWaitlist();
+    const waitlist = await getWaitlist();
     
     // Check if email already exists
     const existing = waitlist.find(w => w.email.toLowerCase() === email.toLowerCase());
@@ -59,7 +64,7 @@ export async function POST(request: NextRequest) {
       referrer: referrer || null
     });
 
-    saveWaitlist(waitlist);
+    await saveWaitlist(waitlist);
 
     return NextResponse.json({
       success: true,
@@ -74,10 +79,20 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// GET /api/waitlist - Get waitlist stats (no emails exposed)
-export async function GET() {
+// GET /api/waitlist - Get waitlist stats (no emails exposed publicly)
+export async function GET(request: NextRequest) {
   try {
-    const waitlist = getWaitlist();
+    const waitlist = await getWaitlist();
+    
+    // Check for admin key to get full list
+    const adminKey = request.nextUrl.searchParams.get('admin');
+    if (adminKey === process.env.ADMIN_KEY) {
+      return NextResponse.json({
+        total: waitlist.length,
+        entries: waitlist
+      });
+    }
+    
     return NextResponse.json({
       total: waitlist.length,
       lastSignup: waitlist.length > 0 ? waitlist[waitlist.length - 1].timestamp : null
