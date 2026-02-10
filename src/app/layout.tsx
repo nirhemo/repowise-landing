@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "RepoWise — The Context Engine",
     description:
-      "The missing context layer between your codebase and AI. Auto-syncs on every commit.",
+      "The missing context layer between your codebase and AI. Generate living documentation that keeps AI coding assistants in sync with your code.",
     url: "https://www.repowise.ai",
     siteName: "RepoWise",
     type: "website",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "RepoWise — The Context Engine",
     description:
-      "The missing context layer between your codebase and AI. Auto-syncs on every commit.",
+      "The missing context layer between your codebase and AI. Generate living documentation that keeps AI coding assistants in sync with your code.",
     images: ["https://www.repowise.ai/images/og-image-v6.jpg"],
   },
 };
