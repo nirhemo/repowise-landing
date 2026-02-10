@@ -19,6 +19,7 @@ export const metadata: Metadata = {
     "RepoWise — The Context Engine. The missing context layer between your codebase and AI. Auto-syncs on every commit.",
   keywords:
     "AI documentation, codebase context, AI coding assistant, developer tools, code documentation",
+  authors: [{ name: "RepoWise" }],
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
@@ -34,6 +35,7 @@ export const metadata: Metadata = {
     url: "https://www.repowise.ai",
     siteName: "RepoWise",
     type: "website",
+    locale: "en_US",
     images: [
       {
         url: "https://www.repowise.ai/images/og-image-v6.jpg",
