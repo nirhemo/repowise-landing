@@ -98,10 +98,9 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
           <h1 className="heading-xl mb-6">
-            RepoWise —{" "}
-            <span className="text-gradient-primary">
-              The Context Engine
-            </span>
+            <span className="text-gradient-primary">RepoWise</span>
+            <br />
+            <span className="text-white">The Context Engine</span>
           </h1>
 
           <p className="body-lg mb-10 max-w-2xl mx-auto">
