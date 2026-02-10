@@ -52,7 +52,7 @@ const itemVariants = {
 
 export default function HowItWorks() {
   return (
-    <section className="py-28 bg-slate-950 relative overflow-hidden">
+    <section id="how-it-works" className="py-28 bg-slate-950 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/5 rounded-full blur-[100px]" />

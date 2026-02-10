@@ -51,7 +51,7 @@ const itemVariants = {
 
 export default function Problem() {
   return (
-    <section className="py-28 bg-slate-900 relative overflow-hidden">
+    <section id="problem" className="py-28 bg-slate-900 relative overflow-hidden">
       {/* Subtle background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950" />
       

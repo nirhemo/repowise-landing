@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Cpu, Heart, Github, Twitter } from "lucide-react";
+import { Cpu, Heart } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -25,36 +25,9 @@ export default function Footer() {
               <span className="text-xl font-bold text-white">RepoWise</span>
             </div>
 
-            {/* Links */}
-            <div className="flex items-center gap-6">
-              <motion.a
-                href="https://github.com/repowise"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors"
-              >
-                <Github className="w-5 h-5" />
-                <span className="text-sm">GitHub</span>
-              </motion.a>
-              <motion.a
-                href="https://twitter.com/repowise"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors"
-              >
-                <Twitter className="w-5 h-5" />
-                <span className="text-sm">Twitter</span>
-              </motion.a>
-            </div>
-
             {/* Info */}
-            <div className="flex items-center gap-2 text-slate-500 text-sm">
-              <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
-              <span>Free & open source • Coming soon</span>
+            <div className="flex items-center gap-2 text-slate-400 text-sm">
+              <span>Coming soon</span>
             </div>
           </div>
 
@@ -63,7 +36,7 @@ export default function Footer() {
 
           {/* Bottom */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
-            <p>© 2026 RepoWise. MIT License.</p>
+            <p>© 2026 RepoWise</p>
             <p className="flex items-center gap-1.5">
               Built with{" "}
               <motion.span
