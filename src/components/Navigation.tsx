@@ -54,7 +54,7 @@ export default function Navigation() {
             <span className="text-xl font-bold text-white">RepoWise</span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center justify-center flex-1 gap-2">
             {sections.map((section) => (
               <motion.a
                 key={section.name}
@@ -62,12 +62,15 @@ export default function Navigation() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => handleNavClick(section.name)}
-                className="px-3 py-2 text-sm text-slate-400 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-200"
+                className="px-4 py-2 text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-200"
               >
                 {section.name}
               </motion.a>
             ))}
           </div>
+          
+          {/* Spacer for balance */}
+          <div className="hidden md:block w-[140px]"></div>
         </div>
       </div>
     </motion.nav>
