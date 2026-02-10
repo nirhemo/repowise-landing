@@ -8,21 +8,21 @@ const steps = [
     icon: Plus,
     label: "CREATE",
     command: "npx repowise create",
-    description: "Generate context from your codebase",
+    description: "Generate context from codebase",
     color: "primary",
   },
   {
     icon: GitCommit,
     label: "SYNC",
     command: "git commit",
-    description: "Auto-hook keeps docs fresh",
+    description: "Auto-sync on every commit",
     color: "secondary",
   },
   {
     icon: CheckCircle,
     label: "VALIDATE",
     command: "npx repowise validate",
-    description: "Ensure context matches code",
+    description: "Verify context matches code",
     color: "accent",
   },
 ];
@@ -117,7 +117,7 @@ export default function HowItWorks() {
                       : "bg-accent/20"
                   }`} />
                   
-                  <div className="relative bg-slate-900/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-7 h-full hover:border-slate-700 transition-all duration-300 hover-lift">
+                  <div className="relative bg-slate-900/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-7 h-full hover:border-slate-700 transition-all duration-300 hover-lift flex flex-col">
                     {/* Step number badge */}
                     <div className="flex items-center justify-between mb-6">
                       <div className={`step-badge ${
@@ -162,12 +162,12 @@ export default function HowItWorks() {
                     </div>
 
                     {/* Command */}
-                    <code className="block bg-slate-950/80 border border-slate-800 px-4 py-3 rounded-xl text-sm font-mono text-slate-300 mb-4 group-hover:border-slate-700 transition-colors text-center">
+                    <code className="block bg-slate-950/80 border border-slate-800 px-4 py-3 rounded-xl text-sm font-mono text-slate-300 mb-4 group-hover:border-slate-700 transition-colors text-center whitespace-nowrap">
                       {step.command}
                     </code>
 
                     {/* Description */}
-                    <p className="body-md text-sm min-h-[40px]">{step.description}</p>
+                    <p className="body-md text-sm mt-auto">{step.description}</p>
                   </div>
                 </div>
               </motion.div>
