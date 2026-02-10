@@ -7,10 +7,14 @@ import ContextFilesPreview from "@/components/ContextFilesPreview";
 import ComparisonTable from "@/components/ComparisonTable";
 import GetStarted from "@/components/GetStarted";
 import Footer from "@/components/Footer";
+import Analytics from "@/components/Analytics";
+import ExitIntentPopup from "@/components/ExitIntentPopup";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
+      <Analytics />
+      <ExitIntentPopup />
       <Navigation />
       <Hero />
       <Problem />

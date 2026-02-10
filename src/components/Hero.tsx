@@ -1,12 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, BookOpen } from "lucide-react";
+import { Star, Loader2, CheckCircle, Mail } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { trackClick } from "@/lib/analytics";
 
 export default function Hero() {
   const [displayText, setDisplayText] = useState("");
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [result, setResult] = useState<{
+    success: boolean;
+    position?: number;
+    error?: string;
+  } | null>(null);
   const fullText = "npx repowise create";
 
   useEffect(() => {
@@ -22,6 +30,33 @@ export default function Hero() {
 
     return () => clearInterval(timer);
   }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || isSubmitting) return;
+
+    setIsSubmitting(true);
+    trackClick("waitlist_submit");
+
+    try {
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+      setResult(data);
+
+      if (data.success) {
+        setEmail("");
+      }
+    } catch {
+      setResult({ success: false, error: "Something went wrong" });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center gradient-hero pt-16">
@@ -49,24 +84,64 @@ export default function Hero() {
             with your code
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          {/* Waitlist Form */}
+          {!result?.success ? (
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4 max-w-md mx-auto"
+            >
+              <div className="relative w-full sm:w-auto sm:flex-1">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@company.com"
+                  className="w-full pl-10 pr-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                onClick={() => trackClick("waitlist_cta")}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary hover:bg-primary-500 text-white font-semibold rounded-lg transition-all duration-300 hover:glow-primary disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? (
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                ) : (
+                  "Join Waitlist"
+                )}
+              </button>
+            </form>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="flex items-center justify-center gap-2 mb-4 p-4 bg-secondary/10 border border-secondary/30 rounded-lg max-w-md mx-auto"
+            >
+              <CheckCircle className="w-6 h-6 text-secondary" />
+              <span className="text-secondary font-semibold">
+                Thanks! You&apos;re #{result.position} on the list
+              </span>
+            </motion.div>
+          )}
+
+          {result?.error && (
+            <p className="text-red-400 text-sm mb-4">{result.error}</p>
+          )}
+
+          {/* Secondary CTA */}
+          <div className="flex items-center justify-center gap-4 mb-12">
             <Link
               href="https://github.com/nirhemo/repowise"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3 bg-primary hover:bg-primary-500 text-white font-semibold rounded-lg transition-all duration-300 hover:glow-primary"
+              onClick={() => trackClick("github_star")}
+              className="inline-flex items-center gap-2 px-6 py-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg border border-slate-700 transition-colors"
             >
-              <Github className="w-5 h-5" />
-              Get Started
-            </Link>
-            <Link
-              href="https://docs.repowise.ai"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-lg border border-slate-700 transition-colors"
-            >
-              <BookOpen className="w-5 h-5" />
-              Read Docs
+              <Star className="w-5 h-5" />
+              Star on GitHub
             </Link>
           </div>
         </motion.div>

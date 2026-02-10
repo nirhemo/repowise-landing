@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Github, BookOpen, MessageCircle, Cpu, Heart } from "lucide-react";
 import Link from "next/link";
+import { trackClick } from "@/lib/analytics";
 
 export default function Footer() {
   return (
@@ -29,6 +30,7 @@ export default function Footer() {
                 href="https://github.com/nirhemo/repowise"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackClick("footer_github")}
                 className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors"
               >
                 <Github className="w-5 h-5" />
@@ -38,6 +40,7 @@ export default function Footer() {
                 href="https://docs.repowise.ai"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackClick("footer_docs")}
                 className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors"
               >
                 <BookOpen className="w-5 h-5" />
@@ -47,6 +50,7 @@ export default function Footer() {
                 href="https://discord.gg/repowise"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackClick("footer_discord")}
                 className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors"
               >
                 <MessageCircle className="w-5 h-5" />
