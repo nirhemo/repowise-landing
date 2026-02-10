@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Cpu, Heart } from "lucide-react";
+import { Heart } from "lucide-react";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -18,11 +19,14 @@ export default function Footer() {
         >
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             {/* Logo */}
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-600 flex items-center justify-center shadow-lg shadow-primary/20">
-                <Cpu className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold text-white">RepoWise</span>
+            <div className="flex items-center">
+              <Image
+                src="/images/logo-footer.png"
+                alt="RepoWise"
+                width={160}
+                height={40}
+                className="h-10 w-auto object-contain"
+              />
             </div>
 
             {/* Info */}

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Cpu } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { trackClick } from "@/lib/analytics";
 import { useEffect, useState } from "react";
@@ -43,15 +43,21 @@ export default function Navigation() {
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link href="/" className="flex items-center group">
             <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-primary-600 flex items-center justify-center shadow-lg shadow-primary/20 group-hover:shadow-primary/40 transition-shadow duration-300"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="relative h-10"
             >
-              <Cpu className="w-5 h-5 text-white" />
+              <Image
+                src="/images/logo-main.png"
+                alt="RepoWise"
+                width={200}
+                height={40}
+                className="h-10 w-auto object-contain"
+                priority
+              />
             </motion.div>
-            <span className="text-xl font-bold text-white">RepoWise</span>
           </Link>
 
           <div className="hidden md:flex items-center justify-center flex-1 gap-2">

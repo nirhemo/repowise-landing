@@ -16,9 +16,19 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "RepoWise - AI-Ready Codebase Documentation",
   description:
-    "Generate living context documentation that keeps AI coding assistants in sync with your codebase. Free, open source, runs locally.",
+    "Generate living context documentation that keeps AI coding assistants in sync with your codebase. Runs locally.",
   keywords:
-    "AI documentation, codebase context, AI coding assistant, developer tools, code documentation, BMAD",
+    "AI documentation, codebase context, AI coding assistant, developer tools, code documentation",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32" },
+      { url: "/images/favicon-64.png", sizes: "64x64", type: "image/png" },
+      { url: "/images/favicon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/images/favicon-180.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   openGraph: {
     title: "RepoWise - Your codebase, understood by AI",
     description:
