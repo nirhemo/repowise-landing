@@ -30,6 +30,7 @@ async function saveWaitlist(waitlist: WaitlistEntry[]): Promise<void> {
   await put(WAITLIST_BLOB, JSON.stringify(waitlist, null, 2), {
     access: 'public',
     addRandomSuffix: false,
+    allowOverwrite: true,
   });
 }
 
@@ -75,12 +76,7 @@ export async function POST(request: NextRequest) {
 
   } catch (error) {
     console.error('Waitlist error:', error);
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    return NextResponse.json({ 
-      error: 'Failed to join waitlist',
-      details: errorMessage,
-      hasToken: !!process.env.BLOB_READ_WRITE_TOKEN
-    }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to join waitlist' }, { status: 500 });
   }
 }
 
