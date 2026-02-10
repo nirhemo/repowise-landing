@@ -14,7 +14,7 @@
     body {
       width: 1200px;
       height: 630px;
-      background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+      background: #0c1222;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -22,23 +22,9 @@
       font-family: 'Inter', sans-serif;
       color: white;
     }
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      margin-bottom: 30px;
-    }
-    .logo-icon {
-      width: 80px;
-      height: 80px;
-    }
-    .logo-text {
-      font-size: 64px;
-      font-weight: 700;
-      background: linear-gradient(135deg, #38bdf8, #a78bfa);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .logo {
+      height: 140px;
+      margin-bottom: 50px;
     }
     .tagline {
       font-size: 52px;
@@ -56,25 +42,7 @@
   </style>
 </head>
 <body>
-  <div class="logo-container">
-    <svg class="logo-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Hexagon outline -->
-      <path d="M50 5 L85 25 L85 75 L50 95 L15 75 L15 25 Z" stroke="url(#gradient)" stroke-width="4" fill="none"/>
-      <!-- Left curly brace -->
-      <path d="M35 35 Q28 35 28 42 L28 46 Q28 50 22 50 Q28 50 28 54 L28 58 Q28 65 35 65" stroke="url(#gradient)" stroke-width="4" fill="none" stroke-linecap="round"/>
-      <!-- Right curly brace -->
-      <path d="M65 35 Q72 35 72 42 L72 46 Q72 50 78 50 Q72 50 72 54 L72 58 Q72 65 65 65" stroke="url(#gradient)" stroke-width="4" fill="none" stroke-linecap="round"/>
-      <!-- Center dot -->
-      <circle cx="50" cy="50" r="6" fill="#a855f7"/>
-      <defs>
-        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#38bdf8"/>
-          <stop offset="100%" stop-color="#a78bfa"/>
-        </linearGradient>
-      </defs>
-    </svg>
-    <span class="logo-text">RepoWise</span>
-  </div>
+  <img src="images/logo-full.jpg" class="logo" alt="RepoWise">
   <div class="tagline">The Context Engine</div>
   <div class="description">The missing context layer between your codebase and AI</div>
 </body>
