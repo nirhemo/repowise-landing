@@ -12,7 +12,7 @@ const codeLines = [
   { type: "command", content: "cd your-project" },
   { type: "command", content: "npx repowise create" },
   { type: "empty", content: "" },
-  { type: "comment", content: "# That's it! Check _bmad-context/" },
+  { type: "comment", content: "# That's it! Check .repowise-context/" },
 ];
 
 const installCommands = `# Install RepoWise
@@ -22,7 +22,7 @@ npm install -g repowise
 cd your-project
 npx repowise create
 
-# That's it! Check _bmad-context/`;
+# That's it! Check .repowise-context/`;
 
 export default function GetStarted() {
   const [copied, setCopied] = useState(false);
