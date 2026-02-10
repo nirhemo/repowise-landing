@@ -99,12 +99,12 @@ export default function HowItWorks() {
             />
           </div>
 
-          <div className="flex flex-col lg:flex-row items-stretch justify-center gap-8 lg:gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6 max-w-4xl mx-auto">
             {steps.map((step, index) => (
               <motion.div
                 key={step.label}
                 variants={itemVariants}
-                className="flex-1 max-w-sm mx-auto lg:mx-0"
+                className="w-full"
               >
                 {/* Step card */}
                 <div className="group relative h-full">
@@ -162,12 +162,12 @@ export default function HowItWorks() {
                     </div>
 
                     {/* Command */}
-                    <code className="block bg-slate-950/80 border border-slate-800 px-4 py-3 rounded-xl text-sm font-mono text-slate-300 mb-4 group-hover:border-slate-700 transition-colors">
+                    <code className="block bg-slate-950/80 border border-slate-800 px-4 py-3 rounded-xl text-sm font-mono text-slate-300 mb-4 group-hover:border-slate-700 transition-colors text-center">
                       {step.command}
                     </code>
 
                     {/* Description */}
-                    <p className="body-md text-sm">{step.description}</p>
+                    <p className="body-md text-sm min-h-[40px]">{step.description}</p>
                   </div>
                 </div>
               </motion.div>
