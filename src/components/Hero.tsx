@@ -166,9 +166,10 @@ export default function Hero() {
                       value={`https://www.repowise.ai?ref=${result.referralCode}`}
                       className="flex-1 px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-slate-300 truncate"
                     />
-                    <button
-                      onClick={() => {
-                        navigator.clipboard.writeText(`🧠 Your AI assistant reads code but doesn't understand it.
+                    <div className="relative">
+                      <button
+                        onClick={() => {
+                          navigator.clipboard.writeText(`🧠 Your AI assistant reads code but doesn't understand it.
 
 RepoWise — The Context Engine — fixes that. The missing context layer between your codebase and AI.
 
@@ -176,14 +177,21 @@ Auto-syncs on every commit. Works with any AI tool.
 
 Waitlist is open 👇
 https://www.repowise.ai?ref=${result.referralCode}`);
-                        setCopied(true);
-                        trackClick("referral_copy");
-                        setTimeout(() => setCopied(false), 2000);
-                      }}
-                      className="px-3 py-2 bg-primary hover:bg-primary-500 text-white rounded-lg transition-colors"
-                    >
-                      {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                    </button>
+                          setCopied(true);
+                          trackClick("referral_copy");
+                          setTimeout(() => setCopied(false), 2000);
+                        }}
+                        className="px-3 py-2 bg-primary hover:bg-primary-500 text-white rounded-lg transition-colors"
+                      >
+                        {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                      </button>
+                      {copied && (
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-slate-800 text-white text-xs rounded-lg whitespace-nowrap shadow-lg border border-slate-700 animate-fade-in">
+                          Your referral link is copied!
+                          <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-800"></div>
+                        </div>
+                      )}
+                    </div>
                   </div>
                   <div className="flex gap-2 justify-center">
                     <a
