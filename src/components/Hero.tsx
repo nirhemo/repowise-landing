@@ -104,7 +104,7 @@ export default function Hero() {
           </h1>
 
           <p className="body-lg mb-16 max-w-2xl mx-auto">
-            The missing context layer between your codebase and AI. Auto-syncs on every commit.
+            The missing context layer between your codebase and AI.
           </p>
 
           {/* Waitlist Form */}
