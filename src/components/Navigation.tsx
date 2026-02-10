@@ -41,23 +41,23 @@ export default function Navigation() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           <Link href="/" className="flex items-center group">
             <motion.div
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="relative h-10"
+              className="relative flex items-center"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/Logo_transperent.svg"
                 alt="RepoWise"
-                className="h-14 w-auto"
+                className="h-16 w-auto"
               />
             </motion.div>
           </Link>
 
-          <div className="hidden md:flex items-center justify-center flex-1 gap-2">
+          <div className="hidden md:flex items-center justify-center flex-1 gap-3">
             {sections.map((section) => (
               <motion.a
                 key={section.name}
