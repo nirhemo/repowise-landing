@@ -64,7 +64,7 @@ export default function ComparisonTable() {
     <section className="py-24 bg-slate-900">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
@@ -79,7 +79,7 @@ export default function ComparisonTable() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -109,7 +109,7 @@ export default function ComparisonTable() {
               {comparisons.map((row, index) => (
                 <motion.tr
                   key={row.feature}
-                  initial={{ opacity: 0, x: -10 }}
+                  initial={{ opacity: 1, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}

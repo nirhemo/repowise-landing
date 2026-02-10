@@ -4,7 +4,6 @@ import Problem from "@/components/Problem";
 import HowItWorks from "@/components/HowItWorks";
 import Features from "@/components/Features";
 import ContextFilesPreview from "@/components/ContextFilesPreview";
-import ComparisonTable from "@/components/ComparisonTable";
 import GetStarted from "@/components/GetStarted";
 import Footer from "@/components/Footer";
 import Analytics from "@/components/Analytics";
@@ -21,7 +20,6 @@ export default function Home() {
       <HowItWorks />
       <Features />
       <ContextFilesPreview />
-      <ComparisonTable />
       <GetStarted />
       <Footer />
     </main>

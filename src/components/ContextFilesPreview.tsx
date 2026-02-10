@@ -3,32 +3,16 @@
 import { motion } from "framer-motion";
 import {
   Folder,
-  FileText,
-  Code,
-  Settings,
-  TestTube,
+  BookOpen,
   Map,
   Layers,
-  BookOpen,
-  GitBranch,
-  Shield,
-  Users,
-  Zap,
+  MoreHorizontal,
 } from "lucide-react";
 
 const contextFiles = [
   { name: "project-overview.md", icon: BookOpen, color: "text-primary" },
   { name: "architecture.md", icon: Map, color: "text-secondary" },
   { name: "tech-stack.md", icon: Layers, color: "text-accent" },
-  { name: "patterns-and-decisions.md", icon: GitBranch, color: "text-primary" },
-  { name: "coding-conventions.md", icon: Code, color: "text-secondary" },
-  { name: "testing-strategy.md", icon: TestTube, color: "text-accent" },
-  { name: "file-structure.md", icon: Folder, color: "text-primary" },
-  { name: "api-reference.md", icon: Zap, color: "text-secondary" },
-  { name: "data-models.md", icon: Settings, color: "text-accent" },
-  { name: "security.md", icon: Shield, color: "text-primary" },
-  { name: "contributing.md", icon: Users, color: "text-secondary" },
-  { name: "changelog.md", icon: FileText, color: "text-accent" },
 ];
 
 export default function ContextFilesPreview() {
@@ -36,7 +20,7 @@ export default function ContextFilesPreview() {
     <section className="py-24 bg-slate-950">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
@@ -46,12 +30,12 @@ export default function ContextFilesPreview() {
             What you get
           </h2>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-            12 comprehensive context files covering every aspect of your codebase
+            Comprehensive context files covering every aspect of your codebase
           </p>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -71,7 +55,7 @@ export default function ContextFilesPreview() {
               {contextFiles.map((file, index) => (
                 <motion.div
                   key={file.name}
-                  initial={{ opacity: 0, x: -10 }}
+                  initial={{ opacity: 1, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
@@ -83,6 +67,20 @@ export default function ContextFilesPreview() {
                   </span>
                 </motion.div>
               ))}
+              
+              {/* More files indicator */}
+              <motion.div
+                initial={{ opacity: 1, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.45 }}
+                className="flex items-center gap-3 px-3 py-2 rounded-lg cursor-default"
+              >
+                <MoreHorizontal className="w-4 h-4 text-slate-500" />
+                <span className="font-mono text-sm text-slate-500">
+                  and more...
+                </span>
+              </motion.div>
             </div>
           </div>
         </motion.div>
