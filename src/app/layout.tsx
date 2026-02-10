@@ -14,7 +14,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RepoWise - AI-Ready Codebase Documentation",
+  title: "RepoWise - The Context Engine",
   description:
     "RepoWise — The Context Engine. The missing context layer between your codebase and AI. Auto-syncs on every commit.",
   keywords:
