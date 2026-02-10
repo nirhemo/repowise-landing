@@ -56,8 +56,15 @@ export async function POST(request: NextRequest) {
     const referralCode = generateReferralCode(email.toLowerCase());
     
     // Check if email already exists
-    const existing = waitlist.find(w => w.email.toLowerCase() === email.toLowerCase());
-    if (existing) {
+    const existingIndex = waitlist.findIndex(w => w.email.toLowerCase() === email.toLowerCase());
+    if (existingIndex !== -1) {
+      const existing = waitlist[existingIndex];
+      // Generate referral code if doesn't exist (for old entries)
+      if (!existing.referralCode) {
+        existing.referralCode = generateReferralCode(existing.email);
+        waitlist[existingIndex] = existing;
+        await saveWaitlist(waitlist);
+      }
       return NextResponse.json({ 
         success: true,
         message: 'Already on the waitlist!',
