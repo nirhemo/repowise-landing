@@ -1,8 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Star, Loader2, CheckCircle, Mail } from "lucide-react";
-import Link from "next/link";
+import { Loader2, CheckCircle, Mail } from "lucide-react";
 import { useEffect, useState } from "react";
 import { trackClick } from "@/lib/analytics";
 
