@@ -40,6 +40,14 @@ export default function LoginPage() {
     <div className="min-h-screen bg-slate-900 text-white flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="bg-slate-800 rounded-2xl p-8 shadow-xl">
+          {/* Logo */}
+          <div className="flex justify-center mb-6">
+            <img
+              src="/images/logo-main.svg"
+              alt="RepoWise"
+              className="h-10 w-auto"
+            />
+          </div>
           <h1 className="text-2xl font-bold mb-6 text-center">Admin Login</h1>
           
           <form onSubmit={handleSubmit} className="space-y-4">
