@@ -16,77 +16,140 @@ const features = [
     title: "AI-First Format",
     description:
       "Context optimized for token efficiency. Structured for how AI agents actually read and process information.",
+    color: "primary",
   },
   {
     icon: FolderOpen,
     title: "12 Context Files",
     description:
       "Comprehensive coverage: architecture, patterns, tech stack, conventions, testing strategy, and more.",
+    color: "secondary",
   },
   {
     icon: RefreshCcw,
     title: "Auto-Sync",
     description:
       "Git hooks keep documentation fresh with every commit. No manual updates required.",
+    color: "accent",
   },
   {
     icon: ShieldCheck,
     title: "Validation Tests",
     description:
       "Built-in tests ensure your context files stay accurate and aligned with actual code.",
+    color: "primary",
   },
   {
     icon: Heart,
     title: "Free & OSS",
     description:
       "MIT licensed. No vendor lock-in, no subscriptions. Own your documentation forever.",
+    color: "secondary",
   },
   {
     icon: Laptop,
     title: "Runs Locally",
     description:
       "Your code never leaves your machine. Complete privacy and security by default.",
+    color: "accent",
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 25 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
+  },
+};
+
 export default function Features() {
   return (
-    <section className="py-24 bg-slate-900">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-28 bg-slate-900 relative overflow-hidden">
+      {/* Subtle background gradients */}
+      <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px]" />
+
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 1, y: 20 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+          <h2 className="heading-lg mb-5">
             Built for AI agents,{" "}
-            <span className="text-secondary">not just humans</span>
+            <span className="text-gradient-primary">not just humans</span>
           </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+          <p className="body-lg max-w-2xl mx-auto">
             Every feature designed to make AI coding assistants more effective
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((feature, index) => (
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-5"
+        >
+          {features.map((feature) => (
             <motion.div
               key={feature.title}
-              initial={{ opacity: 1, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-slate-800/30 border border-slate-800 rounded-xl p-6 hover:border-primary/50 hover:bg-slate-800/50 transition-all"
+              variants={itemVariants}
+              className="group relative"
             >
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                <feature.icon className="w-6 h-6 text-primary" />
+              {/* Gradient border on hover */}
+              <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-br from-slate-700 via-slate-800 to-slate-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              
+              {/* Card content */}
+              <div className="relative bg-slate-800/40 backdrop-blur-sm rounded-2xl p-6 h-full border border-slate-800/50 hover:bg-slate-800/60 transition-all duration-300">
+                {/* Icon with circular gradient background */}
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 relative overflow-hidden ${
+                  feature.color === "primary"
+                    ? "bg-primary/10"
+                    : feature.color === "secondary"
+                    ? "bg-secondary/10"
+                    : "bg-accent/10"
+                }`}>
+                  {/* Subtle inner glow */}
+                  <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
+                    feature.color === "primary"
+                      ? "bg-primary/20"
+                      : feature.color === "secondary"
+                      ? "bg-secondary/20"
+                      : "bg-accent/20"
+                  }`} />
+                  <feature.icon className={`w-6 h-6 relative z-10 ${
+                    feature.color === "primary"
+                      ? "text-primary"
+                      : feature.color === "secondary"
+                      ? "text-secondary"
+                      : "text-accent"
+                  }`} />
+                </div>
+                
+                <h3 className="text-lg font-semibold mb-2 text-white">{feature.title}</h3>
+                <p className="text-slate-400 text-sm leading-relaxed">{feature.description}</p>
               </div>
-              <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-              <p className="text-slate-400 text-sm">{feature.description}</p>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
