@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://www.repowise.ai/images/og-image-v5.jpg",
+        url: "https://www.repowise.ai/images/og-image-v6.jpg",
         width: 1200,
         height: 630,
         alt: "RepoWise - The context engine for AI coding assistants",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     title: "RepoWise — The Context Engine",
     description:
       "The missing context layer between your codebase and AI. Auto-syncs on every commit.",
-    images: ["https://www.repowise.ai/images/og-image-v5.jpg"],
+    images: ["https://www.repowise.ai/images/og-image-v6.jpg"],
   },
 };
 
