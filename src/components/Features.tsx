@@ -6,7 +6,6 @@ import {
   FolderOpen,
   RefreshCcw,
   ShieldCheck,
-  Heart,
   Laptop,
 } from "lucide-react";
 
@@ -29,7 +28,7 @@ const features = [
     icon: RefreshCcw,
     title: "Auto-Sync",
     description:
-      "Git hooks keep documentation fresh with every commit. No manual updates required.",
+      "Syncs on every merge to production. Works with GitHub, GitLab, and Bitbucket.",
     color: "accent",
   },
   {
@@ -40,18 +39,11 @@ const features = [
     color: "primary",
   },
   {
-    icon: Heart,
-    title: "Free & OSS",
-    description:
-      "MIT licensed. No vendor lock-in, no subscriptions. Own your documentation forever.",
-    color: "secondary",
-  },
-  {
     icon: Laptop,
     title: "Runs Locally",
     description:
       "Your code never leaves your machine. Complete privacy and security by default.",
-    color: "accent",
+    color: "secondary",
   },
 ];
 
