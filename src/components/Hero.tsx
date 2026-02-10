@@ -97,10 +97,9 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h1 className="heading-xl mb-6">
-            <span className="text-gradient-primary">RepoWise</span>
-            <br />
-            <span className="text-white">The Context Engine</span>
+          <h1 className="mb-6">
+            <span className="text-gradient-primary text-6xl sm:text-7xl md:text-8xl font-bold block mb-2">RepoWise</span>
+            <span className="text-white text-4xl sm:text-5xl md:text-6xl font-semibold">The Context Engine</span>
           </h1>
 
           <p className="body-lg mb-16 max-w-2xl mx-auto">
