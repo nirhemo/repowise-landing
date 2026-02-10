@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Loader2, CheckCircle, Mail } from "lucide-react";
+import { Loader2, CheckCircle, Mail, Share2, Copy, Check } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { trackClick } from "@/lib/analytics";
 
 export default function Hero() {
@@ -10,12 +11,16 @@ export default function Hero() {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showOutput, setShowOutput] = useState(false);
+  const [copied, setCopied] = useState(false);
   const [result, setResult] = useState<{
     success: boolean;
     position?: number;
     error?: string;
+    referralCode?: string;
   } | null>(null);
   const fullText = "npx repowise create";
+  const searchParams = useSearchParams();
+  const refCode = searchParams.get("ref");
 
   useEffect(() => {
     let index = 0;
@@ -43,7 +48,7 @@ export default function Hero() {
       const response = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, ref: refCode }),
       });
 
       const data = await response.json();
@@ -142,12 +147,42 @@ export default function Hero() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="flex items-center justify-center gap-3 mb-4 p-4 bg-secondary/10 border border-secondary/30 rounded-xl max-w-md mx-auto backdrop-blur-sm"
+              className="mb-4 p-6 bg-secondary/10 border border-secondary/30 rounded-xl max-w-md mx-auto backdrop-blur-sm"
             >
-              <CheckCircle className="w-6 h-6 text-secondary" />
-              <span className="text-secondary font-semibold">
-                Thank you! We&apos;ll be in touch soon
-              </span>
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <CheckCircle className="w-6 h-6 text-secondary" />
+                <span className="text-secondary font-semibold">
+                  Thank you! We&apos;ll be in touch soon
+                </span>
+              </div>
+              
+              {result.referralCode && (
+                <div className="border-t border-secondary/20 pt-4 mt-4">
+                  <p className="text-slate-400 text-sm mb-3 flex items-center justify-center gap-2">
+                    <Share2 className="w-4 h-4" />
+                    Share with friends and move up the list
+                  </p>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      readOnly
+                      value={`https://www.repowise.ai?ref=${result.referralCode}`}
+                      className="flex-1 px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-slate-300 truncate"
+                    />
+                    <button
+                      onClick={() => {
+                        navigator.clipboard.writeText(`https://www.repowise.ai?ref=${result.referralCode}`);
+                        setCopied(true);
+                        trackClick("referral_copy");
+                        setTimeout(() => setCopied(false), 2000);
+                      }}
+                      className="px-3 py-2 bg-primary hover:bg-primary-500 text-white rounded-lg transition-colors"
+                    >
+                      {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                    </button>
+                  </div>
+                </div>
+              )}
             </motion.div>
           )}
 

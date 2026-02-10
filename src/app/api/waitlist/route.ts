@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { put, list } from '@vercel/blob';
+import crypto from 'crypto';
 
 const WAITLIST_BLOB = 'waitlist.json';
 
@@ -7,7 +8,14 @@ type WaitlistEntry = {
   email: string;
   timestamp: string;
   referrer: string | null;
+  referralCode: string;
+  referredBy: string | null;
 };
+
+function generateReferralCode(email: string): string {
+  const hash = crypto.createHash('md5').update(email).digest('hex');
+  return hash.substring(0, 8);
+}
 
 // Read waitlist from Blob
 async function getWaitlist(): Promise<WaitlistEntry[]> {
@@ -38,31 +46,41 @@ async function saveWaitlist(waitlist: WaitlistEntry[]): Promise<void> {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { email, referrer } = body;
+    const { email, referrer, ref } = body;
 
     if (!email || !email.includes('@')) {
       return NextResponse.json({ error: 'Valid email required' }, { status: 400 });
     }
 
     const waitlist = await getWaitlist();
+    const referralCode = generateReferralCode(email.toLowerCase());
     
     // Check if email already exists
     const existing = waitlist.find(w => w.email.toLowerCase() === email.toLowerCase());
     if (existing) {
-      const position = waitlist.findIndex(w => w.email.toLowerCase() === email.toLowerCase()) + 1;
       return NextResponse.json({ 
         success: true,
         message: 'Already on the waitlist!',
-        position,
-        total: waitlist.length
+        referralCode: existing.referralCode,
       });
+    }
+
+    // Find who referred them (if any)
+    let referredBy: string | null = null;
+    if (ref) {
+      const referrerEntry = waitlist.find(w => w.referralCode === ref);
+      if (referrerEntry) {
+        referredBy = referrerEntry.email;
+      }
     }
 
     // Add new entry
     waitlist.push({
       email: email.toLowerCase(),
       timestamp: new Date().toISOString(),
-      referrer: referrer || null
+      referrer: referrer || null,
+      referralCode,
+      referredBy,
     });
 
     await saveWaitlist(waitlist);
@@ -70,8 +88,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       message: 'Welcome to the waitlist!',
-      position: waitlist.length,
-      total: waitlist.length
+      referralCode,
     }, { status: 201 });
 
   } catch (error) {

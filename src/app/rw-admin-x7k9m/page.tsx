@@ -7,6 +7,8 @@ type WaitlistEntry = {
   email: string;
   timestamp: string;
   referrer: string | null;
+  referralCode: string;
+  referredBy: string | null;
 };
 
 type AnalyticsEvent = {
@@ -105,10 +107,16 @@ export default function AdminPage() {
         </div>
 
         {/* Stats Overview */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
           <div className="bg-slate-800 rounded-xl p-4">
             <p className="text-slate-400 text-sm">Waitlist Signups</p>
             <p className="text-3xl font-bold text-primary">{waitlist.length}</p>
+          </div>
+          <div className="bg-slate-800 rounded-xl p-4">
+            <p className="text-slate-400 text-sm">Referrals</p>
+            <p className="text-3xl font-bold text-green-400">
+              {waitlist.filter(w => w.referredBy).length}
+            </p>
           </div>
           <div className="bg-slate-800 rounded-xl p-4">
             <p className="text-slate-400 text-sm">Click Events</p>
@@ -121,9 +129,9 @@ export default function AdminPage() {
             </p>
           </div>
           <div className="bg-slate-800 rounded-xl p-4">
-            <p className="text-slate-400 text-sm">Nav Clicks</p>
+            <p className="text-slate-400 text-sm">Share Clicks</p>
             <p className="text-3xl font-bold text-white">
-              {analytics.filter(a => a.event.includes("nav_")).length}
+              {analytics.filter(a => a.event.includes("referral")).length}
             </p>
           </div>
         </div>
@@ -140,22 +148,35 @@ export default function AdminPage() {
                   <th className="pb-2">#</th>
                   <th className="pb-2">Email</th>
                   <th className="pb-2">Date</th>
-                  <th className="pb-2">Referrer</th>
+                  <th className="pb-2">Referred By</th>
+                  <th className="pb-2">Referrals</th>
                 </tr>
               </thead>
               <tbody>
-                {waitlist.map((entry, i) => (
-                  <tr key={entry.email} className="border-t border-slate-700">
-                    <td className="py-2 text-slate-500">{i + 1}</td>
-                    <td className="py-2">{entry.email}</td>
-                    <td className="py-2 text-slate-400">
-                      {new Date(entry.timestamp).toLocaleDateString()}
-                    </td>
-                    <td className="py-2 text-slate-500 text-sm">
-                      {entry.referrer || "-"}
-                    </td>
-                  </tr>
-                ))}
+                {waitlist.map((entry, i) => {
+                  const referralCount = waitlist.filter(w => w.referredBy === entry.email).length;
+                  return (
+                    <tr key={entry.email} className="border-t border-slate-700">
+                      <td className="py-2 text-slate-500">{i + 1}</td>
+                      <td className="py-2">{entry.email}</td>
+                      <td className="py-2 text-slate-400">
+                        {new Date(entry.timestamp).toLocaleDateString()}
+                      </td>
+                      <td className="py-2 text-slate-500 text-sm">
+                        {entry.referredBy || "-"}
+                      </td>
+                      <td className="py-2">
+                        {referralCount > 0 ? (
+                          <span className="px-2 py-1 bg-primary/20 text-primary text-xs rounded-full">
+                            {referralCount}
+                          </span>
+                        ) : (
+                          <span className="text-slate-600">0</span>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           )}

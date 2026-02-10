@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import Problem from "@/components/Problem";
@@ -16,22 +17,28 @@ export default function Home() {
       <Analytics />
       <ExitIntentPopup />
       <Navigation />
-      <Hero />
+      <Suspense fallback={<div className="min-h-screen" />}>
+        <Hero />
+      </Suspense>
       <Problem />
       <HowItWorks />
-      <WaitlistCTA 
-        title="Ready to try it?"
-        subtitle="Get early access when we launch"
-        location="mid-page"
-      />
+      <Suspense fallback={null}>
+        <WaitlistCTA 
+          title="Ready to try it?"
+          subtitle="Get early access when we launch"
+          location="mid-page"
+        />
+      </Suspense>
       <Features />
       <ContextFilesPreview />
       <GetStarted />
-      <WaitlistCTA 
-        title="Don't miss out"
-        subtitle="Join 100+ developers on the waitlist"
-        location="pre-footer"
-      />
+      <Suspense fallback={null}>
+        <WaitlistCTA 
+          title="Don't miss out"
+          subtitle="Join 100+ developers on the waitlist"
+          location="pre-footer"
+        />
+      </Suspense>
       <Footer />
     </main>
   );
