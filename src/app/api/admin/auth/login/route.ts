@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import crypto from "crypto";
 
+export const dynamic = "force-dynamic";
+
 // Admin credentials from environment variables
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@repowise.ai";
 const ADMIN_PASSWORD_HASH = process.env.ADMIN_PASSWORD_HASH;
