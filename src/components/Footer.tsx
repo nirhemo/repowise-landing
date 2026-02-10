@@ -21,7 +21,7 @@ export default function Footer() {
             <div className="flex items-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/logo-main.jpg"
+                src="/images/Logo_transperent.svg"
                 alt="RepoWise"
                 className="h-8 w-auto"
               />
