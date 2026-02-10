@@ -22,15 +22,26 @@
       font-family: 'Inter', sans-serif;
       color: white;
     }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
     .logo {
       height: 240px;
       margin-bottom: 40px;
+      margin-left: 40px;
+      display: block;
     }
     .tagline {
       font-size: 52px;
       font-weight: 600;
       color: white;
       margin-bottom: 28px;
+      text-align: center;
+      width: 100%;
     }
     .description {
       font-size: 28px;
@@ -38,12 +49,15 @@
       color: white;
       max-width: 900px;
       text-align: center;
+      width: 100%;
     }
   </style>
 </head>
 <body>
-  <img src="images/logo-full.jpg" class="logo" alt="RepoWise">
-  <div class="tagline">The Context Engine</div>
-  <div class="description">The missing context layer between your codebase and AI</div>
+  <div class="container">
+    <img src="images/logo-full.jpg" class="logo" alt="RepoWise">
+    <div class="tagline">The Context Engine</div>
+    <div class="description">The missing context layer between your codebase and AI</div>
+  </div>
 </body>
 </html>
