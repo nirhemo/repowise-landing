@@ -92,19 +92,6 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          {/* Eyebrow text */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-6"
-          >
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700/50 text-sm text-slate-300">
-              <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
-              Open Source • Coming Soon
-            </span>
-          </motion.div>
-
           <h1 className="heading-xl mb-6">
             Your codebase,{" "}
             <span className="text-gradient-primary">
