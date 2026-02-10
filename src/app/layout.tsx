@@ -16,7 +16,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "RepoWise - AI-Ready Codebase Documentation",
   description:
-    "RepoWise generates a context layer that lives in your repo and auto-syncs on every commit. The missing layer between your codebase and AI coding assistants.",
+    "RepoWise — The Context Engine. The missing context layer between your codebase and AI. Auto-syncs on every commit.",
   keywords:
     "AI documentation, codebase context, AI coding assistant, developer tools, code documentation",
   icons: {
@@ -28,9 +28,9 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: "RepoWise - Your codebase, understood by AI",
+    title: "RepoWise — The Context Engine",
     description:
-      "RepoWise generates a context layer that lives in your repo and auto-syncs on every commit. The missing layer between your codebase and AI coding assistants.",
+      "The missing context layer between your codebase and AI. Auto-syncs on every commit.",
     url: "https://www.repowise.ai",
     siteName: "RepoWise",
     type: "website",
@@ -45,9 +45,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "RepoWise - The Context Engine for AI",
+    title: "RepoWise — The Context Engine",
     description:
-      "RepoWise generates a context layer that lives in your repo and auto-syncs on every commit. The missing layer between your codebase and AI coding assistants.",
+      "The missing context layer between your codebase and AI. Auto-syncs on every commit.",
     images: ["https://www.repowise.ai/images/og-image-v3.jpg"],
   },
 };
