@@ -155,7 +155,7 @@ export default function ExitIntentPopup() {
                 </div>
                 <h3 className="text-2xl font-bold mb-2">You&apos;re in!</h3>
                 <p className="text-secondary font-semibold">
-                  You&apos;re #{result.position} on the waitlist
+                  Thank you! We&apos;ll be in touch soon
                 </p>
               </motion.div>
             )}
