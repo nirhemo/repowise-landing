@@ -162,16 +162,6 @@ export default function Hero() {
           )}
 
           {/* Secondary info */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="flex items-center justify-center gap-4 mb-14"
-          >
-            <span className="text-slate-500 text-sm">
-              Free & open source • MIT License
-            </span>
-          </motion.div>
         </motion.div>
 
         {/* Animated Terminal */}
