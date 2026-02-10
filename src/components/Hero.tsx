@@ -146,7 +146,7 @@ export default function Hero() {
             >
               <CheckCircle className="w-6 h-6 text-secondary" />
               <span className="text-secondary font-semibold">
-                Thanks! You&apos;re #{result.position} on the list
+                Thank you! We&apos;ll be in touch soon
               </span>
             </motion.div>
           )}
