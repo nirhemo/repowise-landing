@@ -43,7 +43,7 @@ export default function LoginPage() {
           {/* Logo */}
           <div className="flex justify-center mb-6">
             <img
-              src="/images/logo-main.svg"
+              src="/images/logo-main.jpg"
               alt="RepoWise"
               className="h-10 w-auto"
             />

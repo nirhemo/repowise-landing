@@ -92,9 +92,9 @@ export default function AdminPage() {
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
             <img
-              src="/images/logo-icon.svg"
+              src="/images/logo-icon.jpg"
               alt="RepoWise"
-              className="h-10 w-auto"
+              className="h-10 w-auto rounded-lg"
             />
             <h1 className="text-3xl font-bold">Admin</h1>
           </div>
