@@ -31,15 +31,24 @@ export const metadata: Metadata = {
     title: "RepoWise - Your codebase, understood by AI",
     description:
       "Generate living context documentation that keeps AI agents in sync with your code",
-    url: "https://repowise.ai",
+    url: "https://www.repowise.ai",
     siteName: "RepoWise",
     type: "website",
+    images: [
+      {
+        url: "https://www.repowise.ai/images/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "RepoWise - AI-ready codebase documentation",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "RepoWise - AI-Ready Codebase Documentation",
     description:
       "Generate living context documentation that keeps AI coding assistants in sync with your codebase.",
+    images: ["https://www.repowise.ai/images/og-image.jpg"],
   },
 };
 
