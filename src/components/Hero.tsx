@@ -168,7 +168,14 @@ export default function Hero() {
                     />
                     <button
                       onClick={() => {
-                        navigator.clipboard.writeText(`https://www.repowise.ai?ref=${result.referralCode}`);
+                        navigator.clipboard.writeText(`🧠 Your AI assistant reads code but doesn't understand it.
+
+RepoWise — The Context Engine — fixes that. The missing context layer between your codebase and AI.
+
+Auto-syncs on every commit. Works with any AI tool.
+
+Waitlist is open 👇
+https://www.repowise.ai?ref=${result.referralCode}`);
                         setCopied(true);
                         trackClick("referral_copy");
                         setTimeout(() => setCopied(false), 2000);
@@ -190,7 +197,7 @@ export default function Hero() {
                       LinkedIn
                     </a>
                     <a
-                      href={`https://twitter.com/intent/tweet?text=${encodeURIComponent("🧠 Your AI assistant reads code but doesn't understand it.\n\nRepoWise fixes that — it's a context engine that generates the missing layer between your codebase and AI.\n\nAuto-syncs on every commit. Every AI tool gets it.\n\nWaitlist is open 👇")}&url=${encodeURIComponent(`https://www.repowise.ai?ref=${result.referralCode}`)}`}
+                      href={`https://twitter.com/intent/tweet?text=${encodeURIComponent("🧠 Your AI assistant reads code but doesn't understand it.\n\nRepoWise — The Context Engine — fixes that. The missing context layer between your codebase and AI.\n\nAuto-syncs on every commit. Works with any AI tool.\n\nWaitlist is open 👇")}&url=${encodeURIComponent(`https://www.repowise.ai?ref=${result.referralCode}`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => trackClick("referral_twitter")}
