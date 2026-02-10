@@ -182,17 +182,6 @@ export default function AdminPage() {
           )}
         </div>
 
-        {/* Plausible Link */}
-        <div className="mt-8 text-center">
-          <a
-            href="https://plausible.io/repowise.ai"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary hover:underline"
-          >
-            View full analytics on Plausible →
-          </a>
-        </div>
       </div>
     </div>
   );
