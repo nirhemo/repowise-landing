@@ -85,7 +85,7 @@ export default function AdminPage() {
         const data = await res.json();
         alert(`Failed: ${data.error}`);
       }
-    } catch (err) {
+    } catch {
       alert("Failed to send email");
     }
   }
