@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Heart } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -40,18 +39,8 @@ export default function Footer() {
           <div className="my-10 h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
 
           {/* Bottom */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-slate-500">
             <p>© 2026 RepoWise</p>
-            <p className="flex items-center gap-1.5">
-              Built with{" "}
-              <motion.span
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 1, repeat: Infinity, repeatDelay: 2 }}
-              >
-                <Heart className="w-4 h-4 text-red-400 fill-red-400" />
-              </motion.span>{" "}
-              for the AI-assisted development community
-            </p>
           </div>
         </motion.div>
       </div>
