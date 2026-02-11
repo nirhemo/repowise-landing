@@ -4,41 +4,94 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Mail, Loader2, CheckCircle, Rocket } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 import { trackClick, track } from "@/lib/analytics";
+import { useWaitlist } from "@/context/WaitlistContext";
 
 export default function ExitIntentPopup() {
+  const { isOnWaitlist, setWaitlistResult } = useWaitlist();
   const [isVisible, setIsVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [result, setResult] = useState<{
     success: boolean;
     position?: number;
+    error?: string;
   } | null>(null);
   const [hasShown, setHasShown] = useState(false);
+  const [isReady, setIsReady] = useState(false);
 
+  // Engagement gate: only allow popup after 10 seconds on page
+  useEffect(() => {
+    const timer = setTimeout(() => setIsReady(true), 10000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const showPopup = useCallback(() => {
+    if (hasShown || !isReady) return;
+    // Skip if user already joined waitlist (reactive via context)
+    if (isOnWaitlist) return;
+    // Check dismissal with 7-day expiry
+    const dismissed = localStorage.getItem("repowise_popup_dismissed");
+    if (dismissed) {
+      const dismissedAt = parseInt(dismissed, 10);
+      if (!isNaN(dismissedAt) && Date.now() - dismissedAt < 7 * 24 * 60 * 60 * 1000) return;
+      localStorage.removeItem("repowise_popup_dismissed");
+    }
+    setIsVisible(true);
+    setHasShown(true);
+    track("exit_intent_shown");
+  }, [hasShown, isReady, isOnWaitlist]);
+
+  // Desktop: mouse leave from top
   const handleMouseLeave = useCallback(
     (e: MouseEvent) => {
-      // Only trigger when mouse leaves from the top of the viewport
-      if (e.clientY <= 0 && !hasShown) {
-        // Check if user hasn't dismissed before (stored in localStorage)
-        const dismissed = localStorage.getItem("repowise_popup_dismissed");
-        if (!dismissed) {
-          setIsVisible(true);
-          setHasShown(true);
-          track("exit_intent_shown");
-        }
+      if (e.clientY <= 0) {
+        showPopup();
       }
     },
-    [hasShown]
+    [showPopup]
+  );
+
+  // Mobile: scroll-up detection after deep scroll
+  useEffect(() => {
+    let maxScrollY = 0;
+    const handleMobileScroll = () => {
+      if (hasShown || !isReady) return;
+      const isMobile = window.innerWidth < 768;
+      if (!isMobile) return;
+      const currentScrollY = window.scrollY;
+      maxScrollY = Math.max(maxScrollY, currentScrollY);
+      // User scrolled up 200px+ from a deep point (past 1.5x viewport)
+      if (maxScrollY > window.innerHeight * 1.5 && maxScrollY - currentScrollY > 200) {
+        showPopup();
+      }
+    };
+    window.addEventListener("scroll", handleMobileScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleMobileScroll);
+  }, [hasShown, isReady, showPopup]);
+
+  // ESC key to close
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isVisible) {
+        handleClose();
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isVisible]
   );
 
   useEffect(() => {
     document.addEventListener("mouseleave", handleMouseLeave);
-    return () => document.removeEventListener("mouseleave", handleMouseLeave);
-  }, [handleMouseLeave]);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mouseleave", handleMouseLeave);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleMouseLeave, handleKeyDown]);
 
   const handleClose = () => {
     setIsVisible(false);
-    localStorage.setItem("repowise_popup_dismissed", "true");
+    localStorage.setItem("repowise_popup_dismissed", Date.now().toString());
     trackClick("exit_popup_close");
   };
 
@@ -46,6 +99,7 @@ export default function ExitIntentPopup() {
     e.preventDefault();
     if (!email || isSubmitting) return;
 
+    setResult(null);
     setIsSubmitting(true);
     trackClick("exit_popup_submit");
 
@@ -61,12 +115,10 @@ export default function ExitIntentPopup() {
 
       if (data.success) {
         track("exit_popup_conversion");
-        setTimeout(() => {
-          handleClose();
-        }, 2000);
+        setWaitlistResult({ position: data.position });
       }
     } catch {
-      setResult({ success: false });
+      setResult({ success: false, error: "Something went wrong. Please try again." });
     } finally {
       setIsSubmitting(false);
     }
@@ -83,6 +135,9 @@ export default function ExitIntentPopup() {
           onClick={handleClose}
         >
           <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="exit-popup-title"
             initial={{ opacity: 1, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -105,12 +160,11 @@ export default function ExitIntentPopup() {
                 </div>
 
                 {/* Content */}
-                <h3 className="text-2xl font-bold text-center mb-2">
-                  Don&apos;t miss the launch!
+                <h3 id="exit-popup-title" className="text-2xl font-bold text-center mb-2">
+                  Before you go — your AI is still guessing
                 </h3>
                 <p className="text-slate-400 text-center mb-6">
-                  Be the first to know when RepoWise is ready. Early adopters
-                  get priority access.
+                  Every merge without RepoWise is another day your AI makes suggestions without understanding your architecture. Get on the waitlist for early access.
                 </p>
 
                 {/* Form */}
@@ -135,10 +189,14 @@ export default function ExitIntentPopup() {
                     {isSubmitting ? (
                       <Loader2 className="w-5 h-5 animate-spin" />
                     ) : (
-                      "Join the Waitlist"
+                      "Secure My Spot"
                     )}
                   </button>
                 </form>
+
+                {result?.error && (
+                  <p className="text-red-400 text-sm text-center mt-3">{result.error}</p>
+                )}
 
                 <p className="text-slate-500 text-xs text-center mt-4">
                   No spam, ever. Unsubscribe anytime.

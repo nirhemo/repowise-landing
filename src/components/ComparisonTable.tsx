@@ -5,46 +5,53 @@ import { Check, X, Minus } from "lucide-react";
 
 const comparisons = [
   {
-    feature: "AI-optimized output",
+    feature: "Always-on production sync",
     repowise: true,
-    cursorRules: false,
+    cursor: false,
     swimm: false,
-    codesee: false,
+    cody: false,
   },
   {
-    feature: "Auto-sync with code",
+    feature: "AI-optimized context format",
     repowise: true,
-    cursorRules: false,
+    cursor: false,
+    swimm: false,
+    cody: false,
+  },
+  {
+    feature: "Works with any AI tool",
+    repowise: true,
+    cursor: false,
+    swimm: "na",
+    cody: false,
+  },
+  {
+    feature: "Self-serve — no sales call",
+    repowise: true,
+    cursor: true,
+    swimm: false,
+    cody: false,
+  },
+  {
+    feature: "Context validation",
+    repowise: true,
+    cursor: false,
+    swimm: false,
+    cody: false,
+  },
+  {
+    feature: "Team support",
+    repowise: true,
+    cursor: true,
     swimm: true,
-    codesee: true,
+    cody: true,
   },
   {
-    feature: "Validation tests",
+    feature: "Affordable for individuals",
     repowise: true,
-    cursorRules: false,
+    cursor: true,
     swimm: false,
-    codesee: false,
-  },
-  {
-    feature: "Free/OSS",
-    repowise: true,
-    cursorRules: "na",
-    swimm: false,
-    codesee: false,
-  },
-  {
-    feature: "Works offline",
-    repowise: true,
-    cursorRules: true,
-    swimm: false,
-    codesee: false,
-  },
-  {
-    feature: "BMAD integration",
-    repowise: true,
-    cursorRules: false,
-    swimm: false,
-    codesee: false,
+    cody: false,
   },
 ];
 
@@ -61,7 +68,7 @@ function StatusIcon({ value }: { value: boolean | string }) {
 
 export default function ComparisonTable() {
   return (
-    <section className="py-24 bg-slate-900">
+    <section id="compare" className="py-24 bg-slate-900">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 1, y: 20 }}
@@ -71,10 +78,10 @@ export default function ComparisonTable() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            How we compare
+            Context tools weren&apos;t built for AI. <span className="text-gradient-primary">We are.</span>
           </h2>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-            RepoWise is purpose-built for AI agent workflows
+            See how RepoWise compares to alternatives for AI-powered development
           </p>
         </motion.div>
 
@@ -95,13 +102,13 @@ export default function ComparisonTable() {
                   <span className="text-primary font-semibold">RepoWise</span>
                 </th>
                 <th className="text-center py-4 px-4 text-slate-400 font-medium">
-                  Cursor Rules
+                  Cursor
                 </th>
                 <th className="text-center py-4 px-4 text-slate-400 font-medium">
                   Swimm
                 </th>
                 <th className="text-center py-4 px-4 text-slate-400 font-medium">
-                  CodeSee
+                  Cody
                 </th>
               </tr>
             </thead>
@@ -123,7 +130,7 @@ export default function ComparisonTable() {
                   </td>
                   <td className="py-4 px-4">
                     <div className="flex justify-center">
-                      <StatusIcon value={row.cursorRules} />
+                      <StatusIcon value={row.cursor} />
                     </div>
                   </td>
                   <td className="py-4 px-4">
@@ -133,7 +140,7 @@ export default function ComparisonTable() {
                   </td>
                   <td className="py-4 px-4">
                     <div className="flex justify-center">
-                      <StatusIcon value={row.codesee} />
+                      <StatusIcon value={row.cody} />
                     </div>
                   </td>
                 </motion.tr>
@@ -141,6 +148,10 @@ export default function ComparisonTable() {
             </tbody>
           </table>
         </motion.div>
+
+        <p className="text-slate-500 text-sm text-center mt-8 max-w-2xl mx-auto">
+          Cursor, Cody, and Copilot index raw code. RepoWise generates structured context — architecture maps, dependency graphs, and coding conventions — that AI models can reason about, not just search.
+        </p>
       </div>
     </section>
   );

@@ -14,11 +14,11 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RepoWise - The Context Engine",
+  title: "RepoWise — The Context Engine | Continuous Codebase Intelligence",
   description:
-    "RepoWise — The Context Engine. The missing context layer between your codebase and AI. Auto-syncs on every commit.",
+    "The always-on context layer between your codebase and AI. Production watcher auto-syncs on every merge. Works with Cursor, Claude, Copilot, and any AI tool.",
   keywords:
-    "AI documentation, codebase context, AI coding assistant, developer tools, code documentation",
+    "context engine, codebase intelligence, production watcher, Cursor context, Claude context, Copilot context, AI documentation, codebase context, AI coding assistant, developer tools",
   authors: [{ name: "RepoWise" }],
   icons: {
     icon: [
@@ -29,9 +29,9 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: "RepoWise — The Context Engine",
+    title: "RepoWise — The Context Engine | Continuous Codebase Intelligence",
     description:
-      "The missing context layer between your codebase and AI. Generate living documentation that keeps AI coding assistants in sync with your code.",
+      "The always-on context layer between your codebase and AI. Production watcher auto-syncs on every merge. Works with Cursor, Claude, Copilot, and any AI tool.",
     url: "https://www.repowise.ai",
     siteName: "RepoWise",
     type: "website",
@@ -41,15 +41,15 @@ export const metadata: Metadata = {
         url: "https://www.repowise.ai/images/og-image-v6.jpg",
         width: 1200,
         height: 630,
-        alt: "RepoWise - The context engine for AI coding assistants",
+        alt: "RepoWise - Continuous codebase intelligence for AI coding tools",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "RepoWise — The Context Engine",
+    title: "RepoWise — The Context Engine | Continuous Codebase Intelligence",
     description:
-      "The missing context layer between your codebase and AI. Generate living documentation that keeps AI coding assistants in sync with your code.",
+      "The always-on context layer between your codebase and AI. Production watcher auto-syncs on every merge. Works with Cursor, Claude, Copilot, and any AI tool.",
     images: ["https://www.repowise.ai/images/og-image-v6.jpg"],
   },
 };

@@ -336,3 +336,8 @@ section {
 .animate-fade-in {
   animation: fade-in 0.2s ease-out;
 }
+
+/* Safe area bottom padding for floating CTA on notched devices */
+.safe-bottom {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}

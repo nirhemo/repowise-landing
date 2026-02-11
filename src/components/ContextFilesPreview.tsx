@@ -8,7 +8,10 @@ import {
 } from "lucide-react";
 
 const contextFolders = [
-  { name: "architecture", color: "text-primary" },
+  { name: "project-overview", color: "text-primary" },
+  { name: "architecture", color: "text-secondary" },
+  { name: "data-models", color: "text-accent" },
+  { name: "api-contracts", color: "text-primary" },
   { name: "patterns", color: "text-secondary" },
   { name: "conventions", color: "text-accent" },
 ];
@@ -31,10 +34,10 @@ export default function ContextFilesPreview() {
           className="text-center mb-16"
         >
           <h2 className="heading-lg mb-5">
-            What you get
+            Your AI&apos;s new knowledge base
           </h2>
           <p className="body-lg max-w-2xl mx-auto">
-            Comprehensive context files covering every aspect of your codebase
+            Structured context files organized by project domain — automatically generated and always current
           </p>
         </motion.div>
 
@@ -48,7 +51,7 @@ export default function ContextFilesPreview() {
           <div className="relative group">
             {/* Glow effect */}
             <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
-            
+
             <div className="relative bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden shadow-2xl">
               {/* Folder header */}
               <div className="flex items-center gap-3 px-5 py-4 bg-slate-800/60 border-b border-slate-700/50">
@@ -78,23 +81,23 @@ export default function ContextFilesPreview() {
                   >
                     {/* Tree line */}
                     <span className="text-slate-600 font-mono text-sm">├</span>
-                    
+
                     {/* Folder icon */}
                     <Folder className={`w-5 h-5 ${folder.color}`} />
-                    
+
                     {/* Folder name */}
                     <span className="font-mono text-sm text-slate-300">
                       {folder.name}/
                     </span>
                   </motion.div>
                 ))}
-                
+
                 {/* Vertical dots indicating more */}
                 <motion.div
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: 0.4 }}
+                  transition={{ duration: 0.3, delay: 0.7 }}
                   className="flex items-center gap-3 px-3 py-2"
                 >
                   <span className="text-slate-600 font-mono text-sm">│</span>
@@ -102,12 +105,23 @@ export default function ContextFilesPreview() {
                     <MoreVertical className="w-4 h-4 text-slate-600" />
                   </div>
                   <span className="text-slate-500 text-sm ml-2">
-                    and more context files...
+                    + testing, deployment, domain-model, and more...
                   </span>
                 </motion.div>
               </div>
             </div>
           </div>
+
+          {/* Note below card */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+            className="text-slate-500 text-sm text-center mt-6"
+          >
+            Auto-generated on first scan. Updated on every production merge.
+          </motion.p>
         </motion.div>
       </div>
     </section>

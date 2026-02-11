@@ -1,10 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Loader2, CheckCircle, Mail, Share2, Copy, Check } from "lucide-react";
+import { Loader2, CheckCircle, Mail, Share2, Copy, Check, ShieldCheck } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { trackClick } from "@/lib/analytics";
+import { useWaitlist } from "@/context/WaitlistContext";
 
 export default function Hero() {
   const [displayText, setDisplayText] = useState("");
@@ -18,7 +19,8 @@ export default function Hero() {
     error?: string;
     referralCode?: string;
   } | null>(null);
-  const fullText = "npx repowise create";
+  const { setWaitlistResult } = useWaitlist();
+  const fullText = "repowise watching main...";
   const searchParams = useSearchParams();
   const refCode = searchParams.get("ref");
 
@@ -56,9 +58,10 @@ export default function Hero() {
 
       if (data.success) {
         setEmail("");
+        setWaitlistResult({ referralCode: data.referralCode, position: data.position });
       }
     } catch {
-      setResult({ success: false, error: "Something went wrong" });
+      setResult({ success: false, error: "Something went wrong. Please try again." });
     } finally {
       setIsSubmitting(false);
     }
@@ -98,47 +101,62 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
           <h1 className="mb-6">
-            <span className="text-gradient-primary text-6xl sm:text-7xl md:text-8xl font-bold block mb-2">RepoWise</span>
-            <span className="text-white text-4xl sm:text-5xl md:text-6xl font-semibold">The Context Engine</span>
+            <span className="inline-block px-4 py-1.5 mb-4 text-sm font-semibold text-primary bg-primary/10 border border-primary/20 rounded-full">RepoWise — The Context Engine</span>
+            <span className="text-white text-4xl sm:text-5xl md:text-6xl font-bold block leading-tight">Your AI finally understands<br />your codebase</span>
           </h1>
 
-          <p className="body-lg mb-16 max-w-2xl mx-auto">
-            The missing context layer between your codebase and AI.
+          <p className="body-lg mb-8 max-w-2xl mx-auto">
+            The always-on context layer between your codebase and AI. Auto-syncs on every merge.
           </p>
 
-          {/* Waitlist Form */}
-          {!result?.success ? (
-            <motion.form
-              onSubmit={handleSubmit}
-              initial={{ opacity: 0, y: 10 }}
+          {/* Referred user welcome */}
+          {refCode && !result?.success && (
+            <motion.p
+              initial={{ opacity: 0, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4 max-w-md mx-auto"
+              className="text-secondary text-sm font-medium mb-4 inline-flex items-center gap-2 px-4 py-2 bg-secondary/10 border border-secondary/20 rounded-full"
             >
-              <div className="relative w-full sm:w-auto sm:flex-1 group">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500 transition-colors group-focus-within:text-primary" />
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@company.com"
-                  className="w-full pl-10 pr-4 py-3.5 bg-slate-800/80 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
-                  required
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                onClick={() => trackClick("waitlist_cta")}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-primary hover:bg-primary-500 text-white font-semibold rounded-xl transition-all duration-300 btn-glow disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-primary/25"
+              A friend invited you — join the waitlist for priority access together
+            </motion.p>
+          )}
+
+          {/* Waitlist Form */}
+          <div id="hero-form" />
+          {!result?.success ? (
+            <>
+              <motion.form
+                onSubmit={handleSubmit}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-2 max-w-md mx-auto"
               >
-                {isSubmitting ? (
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                ) : (
-                  "Join Waitlist"
-                )}
-              </button>
-            </motion.form>
+                <div className="relative w-full sm:w-auto sm:flex-1 group">
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500 transition-colors group-focus-within:text-primary" />
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="you@company.com"
+                    className="w-full pl-10 pr-4 py-3.5 bg-slate-800/80 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
+                    required
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  onClick={() => trackClick("waitlist_cta")}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-primary hover:bg-primary-500 text-white font-semibold rounded-xl transition-all duration-300 btn-glow disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-primary/25"
+                >
+                  {isSubmitting ? (
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                  ) : (
+                    "Get Early Access"
+                  )}
+                </button>
+              </motion.form>
+              <p className="text-slate-500 text-xs mb-4">No spam, ever. Free during early access.</p>
+            </>
           ) : (
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -146,18 +164,23 @@ export default function Hero() {
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               className="mb-4 p-6 bg-secondary/10 border border-secondary/30 rounded-xl max-w-md mx-auto backdrop-blur-sm"
             >
-              <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="flex items-center justify-center gap-3 mb-2">
                 <CheckCircle className="w-6 h-6 text-secondary" />
                 <span className="text-secondary font-semibold">
-                  Thank you! We&apos;ll be in touch soon
+                  You&apos;re in!
                 </span>
               </div>
-              
+              {result.position && (
+                <p className="text-slate-400 text-sm text-center mb-4">
+                  You&apos;re <span className="text-white font-semibold">#{result.position}</span> on the waitlist. Share to move up.
+                </p>
+              )}
+
               {result.referralCode && (
-                <div className="border-t border-secondary/20 pt-4 mt-4">
+                <div className="border-t border-secondary/20 pt-4 mt-2">
                   <p className="text-slate-400 text-sm mb-3 flex items-center justify-center gap-2">
                     <Share2 className="w-4 h-4" />
-                    Share with friends and move up the list
+                    Refer friends to skip the line
                   </p>
                   <div className="flex gap-2 mb-3">
                     <input
@@ -169,14 +192,9 @@ export default function Hero() {
                     <div className="relative">
                       <button
                         onClick={() => {
-                          navigator.clipboard.writeText(`🧠 Your AI assistant reads code but doesn't understand it.
+                          navigator.clipboard.writeText(`I just joined the RepoWise waitlist — it auto-syncs codebase context to your AI tools on every merge. Works with Cursor, Claude, Copilot, whatever you use.
 
-RepoWise — The Context Engine — fixes that. The missing context layer between your codebase and AI.
-
-Auto-syncs on every commit. Works with any AI tool.
-
-Waitlist is open 👇
-https://www.repowise.ai?ref=${result.referralCode}`);
+Waitlist is open: https://www.repowise.ai?ref=${result.referralCode}`);
                           setCopied(true);
                           trackClick("referral_copy");
                           setTimeout(() => setCopied(false), 2000);
@@ -195,7 +213,7 @@ https://www.repowise.ai?ref=${result.referralCode}`);
                   </div>
                   <div className="flex gap-2 justify-center">
                     <a
-                      href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://www.repowise.ai?ref=${result.referralCode}`)}&summary=${encodeURIComponent("🚀 Just discovered RepoWise — the context engine for AI coding assistants.\n\nThe problem: AI tools read your code but miss the WHY. Architecture decisions, patterns, team conventions — all invisible.\n\nThe solution: RepoWise generates a context layer that lives in your repo and auto-syncs on every commit.\n\nJoined the waitlist 👇")}`}
+                      href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://www.repowise.ai?ref=${result.referralCode}`)}&summary=${encodeURIComponent("I just joined the RepoWise waitlist — it auto-syncs codebase context to your AI tools on every merge.\n\nThe problem: AI reads code but misses architecture, patterns, and team conventions.\n\nRepoWise watches your production branch and keeps everything current. Works with Cursor, Claude, Copilot, and more.")}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => trackClick("referral_linkedin")}
@@ -205,7 +223,7 @@ https://www.repowise.ai?ref=${result.referralCode}`);
                       LinkedIn
                     </a>
                     <a
-                      href={`https://twitter.com/intent/tweet?text=${encodeURIComponent("🧠 Your AI assistant reads code but doesn't understand it.\n\nRepoWise — The Context Engine — fixes that. The missing context layer between your codebase and AI.\n\nAuto-syncs on every commit. Works with any AI tool.\n\nWaitlist is open 👇")}&url=${encodeURIComponent(`https://www.repowise.ai?ref=${result.referralCode}`)}`}
+                      href={`https://twitter.com/intent/tweet?text=${encodeURIComponent("I just joined the RepoWise waitlist — auto-syncs codebase context to AI tools on every merge.\n\nWorks with Cursor, Claude, Copilot. Waitlist is open 👇")}&url=${encodeURIComponent(`https://www.repowise.ai?ref=${result.referralCode}`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => trackClick("referral_twitter")}
@@ -230,7 +248,11 @@ https://www.repowise.ai?ref=${result.referralCode}`);
             </motion.p>
           )}
 
-          {/* Secondary info */}
+          {/* Trust signal */}
+          <p className="text-slate-500 text-xs flex items-center justify-center gap-1.5 mt-2">
+            <ShieldCheck className="w-3.5 h-3.5" />
+            Your code never leaves your repo. We analyze structure, not source.
+          </p>
         </motion.div>
 
         {/* Animated Terminal */}
@@ -272,7 +294,7 @@ https://www.repowise.ai?ref=${result.referralCode}`);
                   >
                     <div className="flex items-center gap-2">
                       <span className="text-secondary">✓</span>
-                      <span className="text-slate-300">Created .repowise-context/</span>
+                      <span className="text-slate-300">Merge detected on main</span>
                     </div>
                     <motion.div
                       initial={{ opacity: 0 }}
@@ -280,7 +302,7 @@ https://www.repowise.ai?ref=${result.referralCode}`);
                       transition={{ delay: 0.2 }}
                       className="text-slate-500 text-sm pl-5"
                     >
-                      Generated context files for your codebase
+                      Updating context for 12 changed files...
                     </motion.div>
                     <motion.div
                       initial={{ opacity: 0 }}
@@ -289,7 +311,7 @@ https://www.repowise.ai?ref=${result.referralCode}`);
                       className="flex items-center gap-2 pt-1"
                     >
                       <span className="text-primary">✓</span>
-                      <span className="text-slate-400 text-sm">Git hooks installed</span>
+                      <span className="text-slate-400 text-sm">Context synced — AI tools updated</span>
                     </motion.div>
                   </motion.div>
                 )}

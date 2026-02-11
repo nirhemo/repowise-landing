@@ -1,28 +1,25 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Plus, GitCommit, CheckCircle } from "lucide-react";
+import { Link2, Eye, Sparkles } from "lucide-react";
 
 const steps = [
   {
-    icon: Plus,
-    label: "CREATE",
-    command: "npx repowise create",
-    description: "Scan and document your codebase",
+    icon: Link2,
+    label: "CONNECT",
+    description: "Authorize your GitHub or Bitbucket repo with one click. RepoWise installs a webhook and starts the first scan — no config files, no YAML.",
     color: "primary",
   },
   {
-    icon: GitCommit,
-    label: "SYNC",
-    command: "git commit",
-    description: "Auto-update on every commit",
+    icon: Eye,
+    label: "WATCH",
+    description: "The watcher monitors your production branch. Every merge triggers an automatic context update.",
     color: "secondary",
   },
   {
-    icon: CheckCircle,
-    label: "VALIDATE",
-    command: "npx repowise validate",
-    description: "Ensure docs match your code",
+    icon: Sparkles,
+    label: "SYNC",
+    description: "Updated context files land in your repo as markdown. Cursor, Claude, Copilot — any tool that reads project files picks them up automatically.",
     color: "accent",
   },
 ];
@@ -67,11 +64,11 @@ export default function HowItWorks() {
           className="text-center mb-20"
         >
           <h2 className="heading-lg mb-5">
-            Three commands.{" "}
-            <span className="text-gradient-primary">Living context.</span>
+            Three steps. Then it{" "}
+            <span className="text-gradient-primary">runs itself.</span>
           </h2>
           <p className="body-lg max-w-2xl mx-auto">
-            Simple workflow that fits naturally into your development process
+            Connect your repo in under two minutes. Your context stays fresh on every merge — no CLI commands, no maintenance scripts.
           </p>
         </motion.div>
 
@@ -116,7 +113,7 @@ export default function HowItWorks() {
                       ? "bg-secondary/20"
                       : "bg-accent/20"
                   }`} />
-                  
+
                   <div className="relative bg-slate-900/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-7 h-full hover:border-slate-700 transition-all duration-300 hover-lift flex flex-col">
                     {/* Step number badge */}
                     <div className="flex items-center justify-between mb-6">
@@ -129,7 +126,7 @@ export default function HowItWorks() {
                       }`}>
                         {index + 1}
                       </div>
-                      
+
                       {/* Icon */}
                       <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
                         step.color === "primary"
@@ -160,11 +157,6 @@ export default function HowItWorks() {
                     }`}>
                       {step.label}
                     </div>
-
-                    {/* Command */}
-                    <code className="block bg-slate-950/80 border border-slate-800 px-4 py-3 rounded-xl text-sm font-mono text-slate-300 mb-4 group-hover:border-slate-700 transition-colors text-center whitespace-nowrap">
-                      {step.command}
-                    </code>
 
                     {/* Description */}
                     <p className="body-md text-sm mt-auto">{step.description}</p>

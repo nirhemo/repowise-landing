@@ -5,22 +5,26 @@ import { Loader2, CheckCircle, Mail, Share2, Copy, Check } from "lucide-react";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { trackClick } from "@/lib/analytics";
+import { useWaitlist } from "@/context/WaitlistContext";
 
 interface WaitlistCTAProps {
   title?: string;
   subtitle?: string;
+  buttonText?: string;
   location: string; // for analytics
 }
 
-export default function WaitlistCTA({ 
+export default function WaitlistCTA({
   title = "Join the waitlist",
   subtitle = "Be the first to know when we launch",
-  location 
+  buttonText = "Join Waitlist",
+  location
 }: WaitlistCTAProps) {
+  const { isOnWaitlist, setWaitlistResult } = useWaitlist();
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [result, setResult] = useState<{ success: boolean; error?: string; referralCode?: string } | null>(null);
+  const [result, setResult] = useState<{ success: boolean; error?: string; referralCode?: string; position?: number } | null>(null);
   const searchParams = useSearchParams();
   const refCode = searchParams.get("ref");
 
@@ -43,9 +47,10 @@ export default function WaitlistCTA({
 
       if (data.success) {
         setEmail("");
+        setWaitlistResult({ referralCode: data.referralCode, position: data.position });
       }
     } catch {
-      setResult({ success: false, error: "Something went wrong" });
+      setResult({ success: false, error: "Something went wrong. Please try again." });
     } finally {
       setIsSubmitting(false);
     }
@@ -63,52 +68,73 @@ export default function WaitlistCTA({
           <h3 className="text-2xl font-bold text-white mb-2">{title}</h3>
           <p className="text-slate-400 mb-6">{subtitle}</p>
 
-          {!result?.success ? (
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto"
+          {isOnWaitlist && !result?.success ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="p-6 bg-secondary/10 border border-secondary/30 rounded-xl max-w-md mx-auto"
             >
-              <div className="relative w-full sm:flex-1 group">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500 transition-colors group-focus-within:text-primary" />
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@company.com"
-                  className="w-full pl-10 pr-4 py-3 bg-slate-800/80 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
-                  required
-                />
+              <div className="flex items-center justify-center gap-3">
+                <CheckCircle className="w-6 h-6 text-secondary" />
+                <span className="text-secondary font-semibold">
+                  You&apos;re already on the waitlist!
+                </span>
               </div>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary hover:bg-primary-500 text-white font-semibold rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-primary/25"
+            </motion.div>
+          ) : !result?.success ? (
+            <>
+              <form
+                onSubmit={handleSubmit}
+                className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto"
               >
-                {isSubmitting ? (
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                ) : (
-                  "Join Waitlist"
-                )}
-              </button>
-            </form>
+                <div className="relative w-full sm:flex-1 group">
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500 transition-colors group-focus-within:text-primary" />
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="you@company.com"
+                    className="w-full pl-10 pr-4 py-3 bg-slate-800/80 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
+                    required
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary hover:bg-primary-500 text-white font-semibold rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-primary/25"
+                >
+                  {isSubmitting ? (
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                  ) : (
+                    buttonText
+                  )}
+                </button>
+              </form>
+              <p className="text-slate-500 text-xs mt-3">No spam, ever. Unsubscribe anytime.</p>
+            </>
           ) : (
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               className="p-6 bg-secondary/10 border border-secondary/30 rounded-xl max-w-md mx-auto"
             >
-              <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="flex items-center justify-center gap-3 mb-2">
                 <CheckCircle className="w-6 h-6 text-secondary" />
                 <span className="text-secondary font-semibold">
-                  Thank you! We&apos;ll be in touch soon
+                  You&apos;re in!
                 </span>
               </div>
-              
+              {result.position && (
+                <p className="text-slate-400 text-sm text-center mb-4">
+                  You&apos;re <span className="text-white font-semibold">#{result.position}</span> on the waitlist. Share to move up.
+                </p>
+              )}
+
               {result.referralCode && (
-                <div className="border-t border-secondary/20 pt-4 mt-4">
+                <div className="border-t border-secondary/20 pt-4 mt-2">
                   <p className="text-slate-400 text-sm mb-3 flex items-center justify-center gap-2">
                     <Share2 className="w-4 h-4" />
-                    Share with friends
+                    Refer friends to skip the line
                   </p>
                   <div className="flex gap-2 mb-3">
                     <input
@@ -119,7 +145,7 @@ export default function WaitlistCTA({
                     />
                     <button
                       onClick={() => {
-                        navigator.clipboard.writeText(`https://www.repowise.ai?ref=${result.referralCode}`);
+                        navigator.clipboard.writeText(`I just joined the RepoWise waitlist — it auto-syncs codebase context to your AI tools on every merge. Works with Cursor, Claude, Copilot, whatever you use.\n\nWaitlist is open: https://www.repowise.ai?ref=${result.referralCode}`);
                         setCopied(true);
                         trackClick(`referral_copy_${location}`);
                         setTimeout(() => setCopied(false), 2000);
@@ -131,7 +157,7 @@ export default function WaitlistCTA({
                   </div>
                   <div className="flex gap-2 justify-center">
                     <a
-                      href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://www.repowise.ai?ref=${result.referralCode}`)}`}
+                      href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://www.repowise.ai?ref=${result.referralCode}`)}&summary=${encodeURIComponent("I just joined the RepoWise waitlist — it auto-syncs codebase context to your AI tools on every merge.\n\nThe problem: AI reads code but misses architecture, patterns, and team conventions.\n\nRepoWise watches your production branch and keeps everything current. Works with Cursor, Claude, Copilot, and more.")}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => trackClick(`referral_linkedin_${location}`)}
@@ -141,7 +167,7 @@ export default function WaitlistCTA({
                       LinkedIn
                     </a>
                     <a
-                      href={`https://twitter.com/intent/tweet?text=${encodeURIComponent("🧠 Your AI assistant reads code but doesn't understand it.\n\nRepoWise fixes that — it's a context engine that generates the missing layer between your codebase and AI.\n\nWaitlist is open 👇")}&url=${encodeURIComponent(`https://www.repowise.ai?ref=${result.referralCode}`)}`}
+                      href={`https://twitter.com/intent/tweet?text=${encodeURIComponent("I just joined the RepoWise waitlist — auto-syncs codebase context to AI tools on every merge.\n\nWorks with Cursor, Claude, Copilot. Waitlist is open 👇")}&url=${encodeURIComponent(`https://www.repowise.ai?ref=${result.referralCode}`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => trackClick(`referral_twitter_${location}`)}

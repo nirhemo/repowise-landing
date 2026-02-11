@@ -9,8 +9,8 @@ const sections = [
   { name: "Problem", href: "#problem" },
   { name: "How It Works", href: "#how-it-works" },
   { name: "Features", href: "#features" },
+  { name: "Compare", href: "#compare" },
   { name: "Context", href: "#context" },
-  { name: "Get Started", href: "#get-started" },
 ];
 
 export default function Navigation() {
@@ -72,8 +72,16 @@ export default function Navigation() {
             ))}
           </div>
           
-          {/* Spacer for balance */}
-          <div className="hidden md:block w-[140px]"></div>
+          {/* CTA Button — visible on all screen sizes */}
+          <motion.a
+            href="#hero-form"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => handleNavClick("cta")}
+            className="inline-flex items-center px-4 py-2 md:px-5 md:py-2.5 bg-primary hover:bg-primary-500 text-white text-sm font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-primary/25"
+          >
+            Get Early Access
+          </motion.a>
         </div>
       </div>
     </motion.nav>

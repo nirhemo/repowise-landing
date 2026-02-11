@@ -25,13 +25,13 @@ export default function Footer() {
                 className="h-12 w-auto"
               />
               <p className="text-slate-500 text-sm">
-                The missing context layer between your codebase and AI
+                Continuous codebase intelligence for AI coding tools
               </p>
             </div>
 
             {/* Info */}
             <div className="flex items-center gap-2 text-slate-400 text-sm">
-              <span>Coming soon</span>
+              <span>Early access Q2 2026</span>
             </div>
           </div>
 

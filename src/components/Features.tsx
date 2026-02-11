@@ -2,55 +2,55 @@
 
 import { motion } from "framer-motion";
 import {
+  Eye,
   Bot,
-  FolderOpen,
-  RefreshCcw,
+  Blocks,
+  GitBranch,
+  Users,
   ShieldCheck,
-  Laptop,
-  BookOpen,
 } from "lucide-react";
 
 const features = [
   {
+    icon: Eye,
+    title: "Always-On Watcher",
+    description:
+      "Monitors your production branch 24/7. Every merge triggers an automatic context update — so your AI never works with yesterday's understanding.",
+    color: "primary",
+  },
+  {
     icon: Bot,
     title: "AI-First Format",
     description:
-      "Context optimized for token efficiency. Structured for how AI agents actually read and process information.",
-    color: "primary",
-  },
-  {
-    icon: FolderOpen,
-    title: "Context Files",
-    description:
-      "Comprehensive coverage: architecture, patterns, tech stack, conventions, testing strategy, and more.",
+      "Context structured for how AI models actually read — compact, semantically organized, and optimized for token limits. Not long-form docs written for humans.",
     color: "secondary",
   },
   {
-    icon: RefreshCcw,
-    title: "Auto-Sync",
+    icon: Blocks,
+    title: "Works with Everything",
     description:
-      "Syncs on every merge to production. Works with GitHub, GitLab, and Bitbucket.",
+      "Cursor, Claude, Copilot, Windsurf — every AI tool you use gets your architecture, patterns, and conventions. Switching tools doesn't mean starting over.",
     color: "accent",
   },
   {
-    icon: ShieldCheck,
-    title: "Validation Tests",
+    icon: GitBranch,
+    title: "GitHub & Bitbucket",
     description:
-      "Built-in tests ensure your context files stay accurate and aligned with actual code.",
+      "Connects to GitHub and Bitbucket in under two minutes. No webhooks to configure, no infrastructure to manage. GitLab coming soon.",
     color: "primary",
   },
   {
-    icon: BookOpen,
-    title: "Human Readable",
+    icon: Users,
+    title: "Built for Teams",
     description:
-      "AI agent builds documentation that humans love to read. Clear, organized, always up-to-date.",
+      "One team lead sets it up once, and every developer gets context-aware AI from day one. Centralized billing, individual access.",
     color: "secondary",
   },
   {
-    icon: Laptop,
-    title: "Runs Locally",
+    icon: ShieldCheck,
+    title: "Validated Context",
     description:
-      "Your code never leaves your machine. Complete privacy and security by default.",
+      "Built-in validation ensures your context stays accurate — so your AI builds on facts, not assumptions.",
     color: "accent",
   },
 ];
@@ -93,11 +93,11 @@ export default function Features() {
           className="text-center mb-16"
         >
           <h2 className="heading-lg mb-5">
-            The context layer{" "}
-            <span className="text-gradient-primary">your AI needs</span>
+            Built for how AI{" "}
+            <span className="text-gradient-primary">actually works</span>
           </h2>
           <p className="body-lg max-w-2xl mx-auto">
-            Every feature designed to make AI coding assistants more effective
+            Every feature designed to make your AI coding tools more accurate, more contextual, and always up-to-date
           </p>
         </motion.div>
 
@@ -116,7 +116,7 @@ export default function Features() {
             >
               {/* Gradient border on hover */}
               <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-br from-slate-700 via-slate-800 to-slate-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              
+
               {/* Card content */}
               <div className="relative bg-slate-800/40 backdrop-blur-sm rounded-2xl p-6 h-full border border-slate-800/50 hover:bg-slate-800/60 transition-all duration-300">
                 {/* Icon with circular gradient background */}
@@ -143,7 +143,7 @@ export default function Features() {
                       : "text-accent"
                   }`} />
                 </div>
-                
+
                 <h3 className="text-lg font-semibold mb-2 text-white">{feature.title}</h3>
                 <p className="text-slate-400 text-sm leading-relaxed">{feature.description}</p>
               </div>

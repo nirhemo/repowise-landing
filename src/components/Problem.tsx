@@ -7,21 +7,21 @@ const problems = [
   {
     icon: Search,
     title: "No Context",
-    description: "AI reads code but misses the 'why' — decisions, patterns, and architectural intent remain hidden.",
+    description: "Your AI sees functions but misses why they exist — the architecture decisions, team conventions, and domain knowledge that took months to build.",
     color: "primary",
     gradient: "from-primary/20 to-primary/5",
   },
   {
     icon: BookX,
     title: "Stale Docs",
-    description: "Documentation drifts from reality. By the time docs are updated, the code has moved on.",
+    description: "Docs go stale in days. Your codebase is three PRs ahead — your documentation is still describing last sprint.",
     color: "accent",
     gradient: "from-accent/20 to-accent/5",
   },
   {
     icon: RefreshCw,
     title: "Manual Sync",
-    description: "Keeping context updated is tedious. Manual documentation becomes a chore nobody wants.",
+    description: "Every dev, every tool, every project needs context setup. It's a tax nobody pays, so AI flies blind.",
     color: "secondary",
     gradient: "from-secondary/20 to-secondary/5",
   },
@@ -68,7 +68,7 @@ export default function Problem() {
             <span className="text-gradient-accent">flying blind</span>
           </h2>
           <p className="body-lg max-w-2xl mx-auto">
-            Without the right context layer, even the smartest AI makes avoidable mistakes
+            Your AI reads every line of code — and still doesn&apos;t understand your system. It&apos;s guessing at architecture and repeating mistakes your team solved months ago.
           </p>
         </motion.div>
 
