@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { put, list } from '@vercel/blob';
 import crypto from 'crypto';
+import { sendWelcomeEmail } from '@/lib/email';
 
 const WAITLIST_BLOB = 'waitlist.json';
 
@@ -91,6 +92,11 @@ export async function POST(request: NextRequest) {
     });
 
     await saveWaitlist(waitlist);
+
+    // Send welcome email (don't await to avoid slowing down response)
+    sendWelcomeEmail(email.toLowerCase(), referralCode).catch((err) => {
+      console.error('Failed to send welcome email:', err);
+    });
 
     return NextResponse.json({
       success: true,
