@@ -11,6 +11,7 @@ type WaitlistEntry = {
   referrer: string | null;
   referralCode: string;
   referredBy: string | null;
+  emailSent?: boolean;
 };
 
 function generateReferralCode(email: string): string {
@@ -60,12 +61,28 @@ export async function POST(request: NextRequest) {
     const existingIndex = waitlist.findIndex(w => w.email.toLowerCase() === email.toLowerCase());
     if (existingIndex !== -1) {
       const existing = waitlist[existingIndex];
+      let needsSave = false;
+      
       // Generate referral code if doesn't exist (for old entries)
       if (!existing.referralCode) {
         existing.referralCode = generateReferralCode(existing.email);
+        needsSave = true;
+      }
+      
+      // Send welcome email if not sent yet (for old entries before email feature)
+      if (!existing.emailSent) {
+        existing.emailSent = true;
+        needsSave = true;
+        sendWelcomeEmail(existing.email, existing.referralCode).catch((err) => {
+          console.error('Failed to send welcome email:', err);
+        });
+      }
+      
+      if (needsSave) {
         waitlist[existingIndex] = existing;
         await saveWaitlist(waitlist);
       }
+      
       return NextResponse.json({ 
         success: true,
         message: 'Already on the waitlist!',
@@ -89,6 +106,7 @@ export async function POST(request: NextRequest) {
       referrer: referrer || null,
       referralCode,
       referredBy,
+      emailSent: true,
     });
 
     await saveWaitlist(waitlist);
