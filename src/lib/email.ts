@@ -28,7 +28,7 @@ export async function sendWelcomeEmail(to: string, referralCode: string): Promis
           <!-- Header with logo -->
           <tr>
             <td style="background-color: #0f172a; padding: 30px; text-align: center;">
-              <img src="https://www.repowise.ai/images/Logo_transperent.svg" alt="RepoWise" width="200" style="max-width: 200px;">
+              <img src="https://www.repowise.ai/images/logo-main.png" alt="RepoWise" width="180" style="max-width: 180px;">
             </td>
           </tr>
           
