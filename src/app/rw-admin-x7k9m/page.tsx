@@ -15,7 +15,7 @@ type WaitlistEntry = {
 type AnalyticsEvent = {
   event: string;
   timestamp: string;
-  data?: Record<string, string>;
+  data?: { element?: string; [key: string]: unknown };
 };
 
 export default function AdminPage() {
@@ -169,13 +169,13 @@ export default function AdminPage() {
           <div className="bg-slate-800 rounded-xl p-4">
             <p className="text-slate-400 text-sm">CTA Clicks</p>
             <p className="text-3xl font-bold text-accent">
-              {analytics.filter(a => a.event.includes("waitlist")).length}
+              {analytics.filter(a => a.data?.element?.includes("waitlist")).length}
             </p>
           </div>
           <div className="bg-slate-800 rounded-xl p-4">
             <p className="text-slate-400 text-sm">Share Clicks</p>
             <p className="text-3xl font-bold text-white">
-              {analytics.filter(a => a.event.includes("referral")).length}
+              {analytics.filter(a => a.data?.element?.includes("referral")).length}
             </p>
           </div>
         </div>
