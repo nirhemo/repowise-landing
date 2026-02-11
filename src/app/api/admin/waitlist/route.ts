@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server';
-import { list } from '@vercel/blob';
+import { NextRequest, NextResponse } from 'next/server';
+import { list, put } from '@vercel/blob';
 
 const WAITLIST_BLOB = 'waitlist.json';
 
@@ -7,6 +7,9 @@ type WaitlistEntry = {
   email: string;
   timestamp: string;
   referrer: string | null;
+  referralCode?: string;
+  referredBy?: string | null;
+  emailSent?: boolean;
 };
 
 async function getWaitlist(): Promise<WaitlistEntry[]> {
@@ -34,5 +37,39 @@ export async function GET() {
   } catch (error) {
     console.error('Admin waitlist error:', error);
     return NextResponse.json({ error: 'Failed to get waitlist' }, { status: 500 });
+  }
+}
+
+// DELETE /api/admin/waitlist?email=xxx - Remove email from waitlist
+export async function DELETE(request: NextRequest) {
+  try {
+    const email = request.nextUrl.searchParams.get('email');
+    
+    if (!email) {
+      return NextResponse.json({ error: 'Email required' }, { status: 400 });
+    }
+    
+    const waitlist = await getWaitlist();
+    const initialLength = waitlist.length;
+    const filtered = waitlist.filter(w => w.email.toLowerCase() !== email.toLowerCase());
+    
+    if (filtered.length === initialLength) {
+      return NextResponse.json({ error: 'Email not found' }, { status: 404 });
+    }
+    
+    await put(WAITLIST_BLOB, JSON.stringify(filtered, null, 2), {
+      access: 'public',
+      addRandomSuffix: false,
+      allowOverwrite: true,
+    });
+    
+    return NextResponse.json({ 
+      success: true, 
+      message: `Removed ${email}`,
+      remaining: filtered.length 
+    });
+  } catch (error) {
+    console.error('Admin delete error:', error);
+    return NextResponse.json({ error: 'Failed to delete' }, { status: 500 });
   }
 }
