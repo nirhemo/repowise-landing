@@ -45,6 +45,17 @@ export default function AdminPage() {
     checkAuth();
   }, [router]);
 
+  // Auto-refresh every 30 seconds
+  useEffect(() => {
+    if (!authenticated) return;
+    
+    const interval = setInterval(() => {
+      fetchData();
+    }, 30000);
+    
+    return () => clearInterval(interval);
+  }, [authenticated]);
+
   async function fetchData() {
     try {
       // Fetch waitlist
