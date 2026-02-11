@@ -26,7 +26,7 @@ const comparisons = [
     cody: false,
   },
   {
-    feature: "Self-serve — no sales call",
+    feature: "Self-serve, no sales call",
     repowise: true,
     cursor: true,
     swimm: false,
@@ -150,7 +150,7 @@ export default function ComparisonTable() {
         </motion.div>
 
         <p className="text-slate-500 text-sm text-center mt-8 max-w-2xl mx-auto">
-          Cursor, Cody, and Copilot index raw code. RepoWise generates structured context — architecture maps, dependency graphs, and coding conventions — that AI models can reason about, not just search.
+          Cursor, Cody, and Copilot index raw code. RepoWise generates structured context: architecture maps, dependency graphs, and coding conventions that AI models can reason about, not just search.
         </p>
       </div>
     </section>

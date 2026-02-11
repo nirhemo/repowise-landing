@@ -30,7 +30,7 @@ export default function Home() {
         <Suspense fallback={null}>
           <WaitlistCTA
             title="Get early access"
-            subtitle="Join the waitlist — be first to connect your repos"
+            subtitle="Join the waitlist. Be first to connect your repos"
             buttonText="Reserve My Spot"
             location="mid-page"
           />

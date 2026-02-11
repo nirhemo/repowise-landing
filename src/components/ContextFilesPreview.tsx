@@ -37,7 +37,7 @@ export default function ContextFilesPreview() {
             Your AI&apos;s new knowledge base
           </h2>
           <p className="body-lg max-w-2xl mx-auto">
-            Structured context files organized by project domain — automatically generated and always current
+            Structured context files organized by project domain, automatically generated and always current
           </p>
         </motion.div>
 

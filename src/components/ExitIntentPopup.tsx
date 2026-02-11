@@ -161,7 +161,7 @@ export default function ExitIntentPopup() {
 
                 {/* Content */}
                 <h3 id="exit-popup-title" className="text-2xl font-bold text-center mb-2">
-                  Before you go — your AI is still guessing
+                  Before you go, your AI is still guessing
                 </h3>
                 <p className="text-slate-400 text-center mb-6">
                   Every merge without RepoWise is another day your AI makes suggestions without understanding your architecture. Get on the waitlist for early access.

@@ -14,7 +14,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RepoWise — The Context Engine | Continuous Codebase Intelligence",
+  title: "RepoWise | The Context Engine | Continuous Codebase Intelligence",
   description:
     "The always-on context layer between your codebase and AI. Production watcher auto-syncs on every merge. Works with Cursor, Claude, Copilot, and any AI tool.",
   keywords:
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: "RepoWise — The Context Engine | Continuous Codebase Intelligence",
+    title: "RepoWise | The Context Engine | Continuous Codebase Intelligence",
     description:
       "The always-on context layer between your codebase and AI. Production watcher auto-syncs on every merge. Works with Cursor, Claude, Copilot, and any AI tool.",
     url: "https://www.repowise.ai",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "RepoWise — The Context Engine | Continuous Codebase Intelligence",
+    title: "RepoWise | The Context Engine | Continuous Codebase Intelligence",
     description:
       "The always-on context layer between your codebase and AI. Production watcher auto-syncs on every merge. Works with Cursor, Claude, Copilot, and any AI tool.",
     images: ["https://www.repowise.ai/images/og-image-v6.jpg"],

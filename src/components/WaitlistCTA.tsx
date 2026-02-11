@@ -145,7 +145,7 @@ export default function WaitlistCTA({
                     />
                     <button
                       onClick={() => {
-                        navigator.clipboard.writeText(`I just joined the RepoWise waitlist — it auto-syncs codebase context to your AI tools on every merge. Works with Cursor, Claude, Copilot, whatever you use.\n\nWaitlist is open: https://www.repowise.ai?ref=${result.referralCode}`);
+                        navigator.clipboard.writeText(`I just joined the RepoWise waitlist. It auto-syncs codebase context to your AI tools on every merge. Works with Cursor, Claude, Copilot, whatever you use.\n\nWaitlist is open: https://www.repowise.ai?ref=${result.referralCode}`);
                         setCopied(true);
                         trackClick(`referral_copy_${location}`);
                         setTimeout(() => setCopied(false), 2000);
@@ -157,7 +157,7 @@ export default function WaitlistCTA({
                   </div>
                   <div className="flex gap-2 justify-center">
                     <a
-                      href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://www.repowise.ai?ref=${result.referralCode}`)}&summary=${encodeURIComponent("I just joined the RepoWise waitlist — it auto-syncs codebase context to your AI tools on every merge.\n\nThe problem: AI reads code but misses architecture, patterns, and team conventions.\n\nRepoWise watches your production branch and keeps everything current. Works with Cursor, Claude, Copilot, and more.")}`}
+                      href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://www.repowise.ai?ref=${result.referralCode}`)}&summary=${encodeURIComponent("I just joined the RepoWise waitlist. It auto-syncs codebase context to your AI tools on every merge.\n\nThe problem: AI reads code but misses architecture, patterns, and team conventions.\n\nRepoWise watches your production branch and keeps everything current. Works with Cursor, Claude, Copilot, and more.")}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => trackClick(`referral_linkedin_${location}`)}
@@ -167,7 +167,7 @@ export default function WaitlistCTA({
                       LinkedIn
                     </a>
                     <a
-                      href={`https://twitter.com/intent/tweet?text=${encodeURIComponent("I just joined the RepoWise waitlist — auto-syncs codebase context to AI tools on every merge.\n\nWorks with Cursor, Claude, Copilot. Waitlist is open 👇")}&url=${encodeURIComponent(`https://www.repowise.ai?ref=${result.referralCode}`)}`}
+                      href={`https://twitter.com/intent/tweet?text=${encodeURIComponent("I just joined the RepoWise waitlist. Auto-syncs codebase context to AI tools on every merge.\n\nWorks with Cursor, Claude, Copilot. Waitlist is open 👇")}&url=${encodeURIComponent(`https://www.repowise.ai?ref=${result.referralCode}`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => trackClick(`referral_twitter_${location}`)}

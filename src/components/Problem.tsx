@@ -7,14 +7,14 @@ const problems = [
   {
     icon: Search,
     title: "No Context",
-    description: "Your AI sees functions but misses why they exist — the architecture decisions, team conventions, and domain knowledge that took months to build.",
+    description: "Your AI sees functions but misses why they exist. The architecture decisions, team conventions, and domain knowledge that took months to build.",
     color: "primary",
     gradient: "from-primary/20 to-primary/5",
   },
   {
     icon: BookX,
     title: "Stale Docs",
-    description: "Docs go stale in days. Your codebase is three PRs ahead — your documentation is still describing last sprint.",
+    description: "Docs go stale in days. Your codebase is three PRs ahead, your documentation is still describing last sprint.",
     color: "accent",
     gradient: "from-accent/20 to-accent/5",
   },
@@ -68,7 +68,7 @@ export default function Problem() {
             <span className="text-gradient-accent">flying blind</span>
           </h2>
           <p className="body-lg max-w-2xl mx-auto">
-            Your AI reads every line of code — and still doesn&apos;t understand your system. It&apos;s guessing at architecture and repeating mistakes your team solved months ago.
+            Your AI reads every line of code and still doesn&apos;t understand your system. It&apos;s guessing at architecture and repeating mistakes your team solved months ago.
           </p>
         </motion.div>
 

@@ -8,27 +8,27 @@ const faqs = [
   {
     question: "Does RepoWise have access to my source code?",
     answer:
-      "RepoWise reads your repository to generate context summaries — structured descriptions of architecture, patterns, and conventions. Your source code is processed but never stored on our servers.",
+      "RepoWise reads your repository to generate context summaries, structured descriptions of architecture, patterns, and conventions. Your source code is processed but never stored on our servers.",
   },
   {
     question: "How does context reach my AI tools?",
     answer:
-      "RepoWise generates structured context files that live in your repo or a connected workspace. Your AI tools — Cursor, Claude, Copilot — read them automatically. No plugins or extensions needed.",
+      "RepoWise generates structured context files that live in your repo or a connected workspace. Your AI tools (Cursor, Claude, Copilot) read them automatically. No plugins or extensions needed.",
   },
   {
     question: "What languages and frameworks are supported?",
     answer:
-      "RepoWise is language-agnostic. It analyzes code structure, architecture patterns, and conventions regardless of your stack — JavaScript, Python, Go, Rust, Java, and more.",
+      "RepoWise is language-agnostic. It analyzes code structure, architecture patterns, and conventions regardless of your stack. JavaScript, Python, Go, Rust, Java, and more.",
   },
   {
     question: "When is launch?",
     answer:
-      "We're targeting early access in Q2 2026. Waitlist members will be invited in order — refer friends to move up the list.",
+      "We're targeting early access in Q2 2026. Waitlist members will be invited in order. Refer friends to move up the list.",
   },
   {
-    question: "Is there a free tier?",
+    question: "How much will it cost?",
     answer:
-      "Yes. Individual developers will have a generous free tier. Team plans with shared billing and individual API keys will be available at launch.",
+      "Pricing will be announced closer to launch. We're building affordable plans for individual developers and teams. Waitlist members get early access pricing.",
   },
 ];
 

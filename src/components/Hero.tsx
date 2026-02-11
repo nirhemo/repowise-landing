@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Loader2, CheckCircle, Mail, Share2, Copy, Check, ShieldCheck } from "lucide-react";
+import { Loader2, CheckCircle, Mail, Share2, Copy, Check } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { trackClick } from "@/lib/analytics";
@@ -101,7 +101,7 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
           <h1 className="mb-6">
-            <span className="inline-block px-4 py-1.5 mb-4 text-sm font-semibold text-primary bg-primary/10 border border-primary/20 rounded-full">RepoWise — The Context Engine</span>
+            <span className="inline-block px-4 py-1.5 mb-4 text-sm font-semibold text-primary bg-primary/10 border border-primary/20 rounded-full">RepoWise | The Context Engine</span>
             <span className="text-white text-4xl sm:text-5xl md:text-6xl font-bold block leading-tight">Your AI finally understands<br />your codebase</span>
           </h1>
 
@@ -116,7 +116,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               className="text-secondary text-sm font-medium mb-4 inline-flex items-center gap-2 px-4 py-2 bg-secondary/10 border border-secondary/20 rounded-full"
             >
-              A friend invited you — join the waitlist for priority access together
+              A friend invited you. Join the waitlist for priority access together
             </motion.p>
           )}
 
@@ -155,7 +155,7 @@ export default function Hero() {
                   )}
                 </button>
               </motion.form>
-              <p className="text-slate-500 text-xs mb-4">No spam, ever. Free during early access.</p>
+              <p className="text-slate-500 text-xs mb-4">No spam, ever. Unsubscribe anytime.</p>
             </>
           ) : (
             <motion.div
@@ -192,7 +192,7 @@ export default function Hero() {
                     <div className="relative">
                       <button
                         onClick={() => {
-                          navigator.clipboard.writeText(`I just joined the RepoWise waitlist — it auto-syncs codebase context to your AI tools on every merge. Works with Cursor, Claude, Copilot, whatever you use.
+                          navigator.clipboard.writeText(`I just joined the RepoWise waitlist. It auto-syncs codebase context to your AI tools on every merge. Works with Cursor, Claude, Copilot, whatever you use.
 
 Waitlist is open: https://www.repowise.ai?ref=${result.referralCode}`);
                           setCopied(true);
@@ -213,7 +213,7 @@ Waitlist is open: https://www.repowise.ai?ref=${result.referralCode}`);
                   </div>
                   <div className="flex gap-2 justify-center">
                     <a
-                      href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://www.repowise.ai?ref=${result.referralCode}`)}&summary=${encodeURIComponent("I just joined the RepoWise waitlist — it auto-syncs codebase context to your AI tools on every merge.\n\nThe problem: AI reads code but misses architecture, patterns, and team conventions.\n\nRepoWise watches your production branch and keeps everything current. Works with Cursor, Claude, Copilot, and more.")}`}
+                      href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://www.repowise.ai?ref=${result.referralCode}`)}&summary=${encodeURIComponent("I just joined the RepoWise waitlist. It auto-syncs codebase context to your AI tools on every merge.\n\nThe problem: AI reads code but misses architecture, patterns, and team conventions.\n\nRepoWise watches your production branch and keeps everything current. Works with Cursor, Claude, Copilot, and more.")}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => trackClick("referral_linkedin")}
@@ -223,7 +223,7 @@ Waitlist is open: https://www.repowise.ai?ref=${result.referralCode}`);
                       LinkedIn
                     </a>
                     <a
-                      href={`https://twitter.com/intent/tweet?text=${encodeURIComponent("I just joined the RepoWise waitlist — auto-syncs codebase context to AI tools on every merge.\n\nWorks with Cursor, Claude, Copilot. Waitlist is open 👇")}&url=${encodeURIComponent(`https://www.repowise.ai?ref=${result.referralCode}`)}`}
+                      href={`https://twitter.com/intent/tweet?text=${encodeURIComponent("I just joined the RepoWise waitlist. Auto-syncs codebase context to AI tools on every merge.\n\nWorks with Cursor, Claude, Copilot. Waitlist is open 👇")}&url=${encodeURIComponent(`https://www.repowise.ai?ref=${result.referralCode}`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => trackClick("referral_twitter")}
@@ -248,11 +248,6 @@ Waitlist is open: https://www.repowise.ai?ref=${result.referralCode}`);
             </motion.p>
           )}
 
-          {/* Trust signal */}
-          <p className="text-slate-500 text-xs flex items-center justify-center gap-1.5 mt-2">
-            <ShieldCheck className="w-3.5 h-3.5" />
-            Your code never leaves your repo. We analyze structure, not source.
-          </p>
         </motion.div>
 
         {/* Animated Terminal */}
@@ -311,7 +306,7 @@ Waitlist is open: https://www.repowise.ai?ref=${result.referralCode}`);
                       className="flex items-center gap-2 pt-1"
                     >
                       <span className="text-primary">✓</span>
-                      <span className="text-slate-400 text-sm">Context synced — AI tools updated</span>
+                      <span className="text-slate-400 text-sm">Context synced. AI tools updated</span>
                     </motion.div>
                   </motion.div>
                 )}

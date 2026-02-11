@@ -15,21 +15,21 @@ const features = [
     icon: Eye,
     title: "Always-On Watcher",
     description:
-      "Monitors your production branch 24/7. Every merge triggers an automatic context update — so your AI never works with yesterday's understanding.",
+      "Monitors your production branch 24/7. Every merge triggers an automatic context update, so your AI never works with yesterday's understanding.",
     color: "primary",
   },
   {
     icon: Bot,
     title: "AI-First Format",
     description:
-      "Context structured for how AI models actually read — compact, semantically organized, and optimized for token limits. Not long-form docs written for humans.",
+      "Context structured for how AI models actually read. Compact, semantically organized, and optimized for token limits. Not long-form docs written for humans.",
     color: "secondary",
   },
   {
     icon: Blocks,
     title: "Works with Everything",
     description:
-      "Cursor, Claude, Copilot, Windsurf — every AI tool you use gets your architecture, patterns, and conventions. Switching tools doesn't mean starting over.",
+      "Cursor, Claude, Copilot, Windsurf. Every AI tool you use gets your architecture, patterns, and conventions. Switching tools doesn't mean starting over.",
     color: "accent",
   },
   {
@@ -50,7 +50,7 @@ const features = [
     icon: ShieldCheck,
     title: "Validated Context",
     description:
-      "Built-in validation ensures your context stays accurate — so your AI builds on facts, not assumptions.",
+      "Built-in validation ensures your context stays accurate, so your AI builds on facts, not assumptions.",
     color: "accent",
   },
 ];

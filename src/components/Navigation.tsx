@@ -72,7 +72,7 @@ export default function Navigation() {
             ))}
           </div>
           
-          {/* CTA Button — visible on all screen sizes */}
+          {/* CTA Button, visible on all screen sizes */}
           <motion.a
             href="#hero-form"
             whileHover={{ scale: 1.02 }}

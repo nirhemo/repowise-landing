@@ -7,7 +7,7 @@ const steps = [
   {
     icon: Link2,
     label: "CONNECT",
-    description: "Authorize your GitHub or Bitbucket repo with one click. RepoWise installs a webhook and starts the first scan — no config files, no YAML.",
+    description: "Authorize your GitHub or Bitbucket repo with one click. RepoWise installs a webhook and starts the first scan. No config files, no YAML.",
     color: "primary",
   },
   {
@@ -19,7 +19,7 @@ const steps = [
   {
     icon: Sparkles,
     label: "SYNC",
-    description: "Updated context files land in your repo as markdown. Cursor, Claude, Copilot — any tool that reads project files picks them up automatically.",
+    description: "Updated context files land in your repo as markdown. Cursor, Claude, Copilot, any tool that reads project files picks them up automatically.",
     color: "accent",
   },
 ];
@@ -68,7 +68,7 @@ export default function HowItWorks() {
             <span className="text-gradient-primary">runs itself.</span>
           </h2>
           <p className="body-lg max-w-2xl mx-auto">
-            Connect your repo in under two minutes. Your context stays fresh on every merge — no CLI commands, no maintenance scripts.
+            Connect your repo in under two minutes. Your context stays fresh on every merge. No CLI commands, no maintenance scripts.
           </p>
         </motion.div>
 
