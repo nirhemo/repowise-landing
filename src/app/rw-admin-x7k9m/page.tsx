@@ -9,6 +9,7 @@ type WaitlistEntry = {
   referrer: string | null;
   referralCode: string;
   referredBy: string | null;
+  emailSent?: boolean;
 };
 
 type AnalyticsEvent = {
@@ -68,6 +69,25 @@ export default function AdminPage() {
   async function handleLogout() {
     await fetch("/api/admin/auth/logout", { method: "POST" });
     router.push("/rw-admin-x7k9m/login");
+  }
+
+  async function handleResendEmail(email: string) {
+    try {
+      const res = await fetch("/api/admin/resend-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (res.ok) {
+        alert(`Email sent to ${email}`);
+        fetchData(); // Refresh data
+      } else {
+        const data = await res.json();
+        alert(`Failed: ${data.error}`);
+      }
+    } catch (err) {
+      alert("Failed to send email");
+    }
   }
 
   if (!authenticated) {
@@ -150,6 +170,8 @@ export default function AdminPage() {
                   <th className="pb-2">Date</th>
                   <th className="pb-2">Referred By</th>
                   <th className="pb-2">Referrals</th>
+                  <th className="pb-2">Email</th>
+                  <th className="pb-2">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -173,6 +195,25 @@ export default function AdminPage() {
                         ) : (
                           <span className="text-slate-600">0</span>
                         )}
+                      </td>
+                      <td className="py-2">
+                        {entry.emailSent ? (
+                          <span className="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded-full">
+                            Sent
+                          </span>
+                        ) : (
+                          <span className="px-2 py-1 bg-yellow-500/20 text-yellow-400 text-xs rounded-full">
+                            Pending
+                          </span>
+                        )}
+                      </td>
+                      <td className="py-2">
+                        <button
+                          onClick={() => handleResendEmail(entry.email)}
+                          className="px-2 py-1 bg-blue-600 hover:bg-blue-500 text-white text-xs rounded"
+                        >
+                          {entry.emailSent ? "Resend" : "Send"}
+                        </button>
                       </td>
                     </tr>
                   );
