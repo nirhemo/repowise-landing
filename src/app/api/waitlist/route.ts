@@ -73,9 +73,11 @@ export async function POST(request: NextRequest) {
       if (!existing.emailSent) {
         existing.emailSent = true;
         needsSave = true;
-        sendWelcomeEmail(existing.email, existing.referralCode).catch((err) => {
+        try {
+          await sendWelcomeEmail(existing.email, existing.referralCode);
+        } catch (err) {
           console.error('Failed to send welcome email:', err);
-        });
+        }
       }
       
       if (needsSave) {
@@ -112,10 +114,12 @@ export async function POST(request: NextRequest) {
 
     await saveWaitlist(waitlist);
 
-    // Send welcome email (don't await to avoid slowing down response)
-    sendWelcomeEmail(email.toLowerCase(), referralCode).catch((err) => {
+    // Send welcome email
+    try {
+      await sendWelcomeEmail(email.toLowerCase(), referralCode);
+    } catch (err) {
       console.error('Failed to send welcome email:', err);
-    });
+    }
 
     return NextResponse.json({
       success: true,
