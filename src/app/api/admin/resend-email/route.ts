@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { list, put } from '@vercel/blob';
+import { list } from '@vercel/blob';
 import { sendWelcomeEmail } from '@/lib/email';
 
 const WAITLIST_BLOB = 'waitlist.json';
@@ -28,14 +28,6 @@ async function getWaitlist(): Promise<WaitlistEntry[]> {
   }
 }
 
-async function saveWaitlist(waitlist: WaitlistEntry[]): Promise<void> {
-  await put(WAITLIST_BLOB, JSON.stringify(waitlist, null, 2), {
-    access: 'public',
-    addRandomSuffix: false,
-    allowOverwrite: true,
-  });
-}
-
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -54,13 +46,8 @@ export async function POST(request: NextRequest) {
 
     const entry = waitlist[entryIndex];
 
-    // Send email
+    // Send email (don't save waitlist to avoid race conditions - emailSent flag is already set on signup)
     await sendWelcomeEmail(entry.email, entry.referralCode);
-
-    // Mark as sent
-    entry.emailSent = true;
-    waitlist[entryIndex] = entry;
-    await saveWaitlist(waitlist);
 
     return NextResponse.json({ success: true, message: `Email sent to ${email}` });
   } catch (error) {
