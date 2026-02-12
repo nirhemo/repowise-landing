@@ -234,7 +234,9 @@ export default function ExitIntentPopup() {
                       />
                       <button
                         onClick={() => {
-                          navigator.clipboard.writeText(`https://www.repowise.ai?ref=${result.referralCode}`);
+                          navigator.clipboard.writeText(`I just joined the RepoWise waitlist. It auto-syncs codebase context to your AI tools on every merge. Works with Cursor, Claude, Copilot, whatever you use.
+
+Waitlist is open: https://www.repowise.ai?ref=${result.referralCode}`);
                           setCopied(true);
                           trackClick("exit_popup_referral_copy");
                           setTimeout(() => setCopied(false), 2000);
