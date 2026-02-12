@@ -18,6 +18,7 @@ export default function Hero() {
     position?: number;
     error?: string;
     referralCode?: string;
+    isExisting?: boolean;
   } | null>(null);
   const { setWaitlistResult } = useWaitlist();
   const fullText = "repowise watching main...";
@@ -167,7 +168,7 @@ export default function Hero() {
               <div className="flex items-center justify-center gap-3 mb-2">
                 <CheckCircle className="w-6 h-6 text-secondary" />
                 <span className="text-secondary font-semibold">
-                  You&apos;re in!
+                  {result.isExisting ? "You're already registered!" : "You're in!"}
                 </span>
               </div>
               {result.position && (

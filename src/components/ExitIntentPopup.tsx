@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Mail, Loader2, CheckCircle, Rocket } from "lucide-react";
+import { X, Mail, Loader2, CheckCircle, Rocket, Share2, Copy, Check } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 import { trackClick, track } from "@/lib/analytics";
 import { useWaitlist } from "@/context/WaitlistContext";
@@ -15,9 +15,12 @@ export default function ExitIntentPopup() {
     success: boolean;
     position?: number;
     error?: string;
+    referralCode?: string;
+    isExisting?: boolean;
   } | null>(null);
   const [hasShown, setHasShown] = useState(false);
   const [isReady, setIsReady] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   // Engagement gate: only allow popup after 10 seconds on page
   useEffect(() => {
@@ -115,7 +118,7 @@ export default function ExitIntentPopup() {
 
       if (data.success) {
         track("exit_popup_conversion");
-        setWaitlistResult({ position: data.position });
+        setWaitlistResult({ position: data.position, referralCode: data.referralCode });
       }
     } catch {
       setResult({ success: false, error: "Something went wrong. Please try again." });
@@ -206,15 +209,47 @@ export default function ExitIntentPopup() {
               <motion.div
                 initial={{ opacity: 1, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="text-center py-8"
+                className="text-center py-4"
               >
-                <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-secondary/10 flex items-center justify-center">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-secondary/10 flex items-center justify-center">
                   <CheckCircle className="w-8 h-8 text-secondary" />
                 </div>
-                <h3 className="text-2xl font-bold mb-2">You&apos;re in!</h3>
-                <p className="text-secondary font-semibold">
-                  Thank you! We&apos;ll be in touch soon
+                <h3 className="text-2xl font-bold mb-2">
+                  {result.isExisting ? "You're already registered!" : "You're in!"}
+                </h3>
+                <p className="text-slate-400 text-sm mb-4">
+                  {result.isExisting 
+                    ? "Here's your referral link to share:" 
+                    : "Thank you! Share your link to skip the line:"}
                 </p>
+
+                {result.referralCode && (
+                  <div className="space-y-3">
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        readOnly
+                        value={`https://www.repowise.ai?ref=${result.referralCode}`}
+                        className="flex-1 px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-slate-300 truncate"
+                      />
+                      <button
+                        onClick={() => {
+                          navigator.clipboard.writeText(`https://www.repowise.ai?ref=${result.referralCode}`);
+                          setCopied(true);
+                          trackClick("exit_popup_referral_copy");
+                          setTimeout(() => setCopied(false), 2000);
+                        }}
+                        className="px-3 py-2 bg-primary hover:bg-primary-500 text-white rounded-lg transition-colors"
+                      >
+                        {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                      </button>
+                    </div>
+                    <p className="text-slate-500 text-xs flex items-center justify-center gap-1">
+                      <Share2 className="w-3 h-3" />
+                      Refer friends to move up the waitlist
+                    </p>
+                  </div>
+                )}
               </motion.div>
             )}
           </motion.div>

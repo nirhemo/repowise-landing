@@ -87,6 +87,7 @@ export async function POST(request: NextRequest) {
         success: true,
         message: 'Already on the waitlist!',
         referralCode: existing.referralCode,
+        isExisting: true,
       });
     }
 

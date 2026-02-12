@@ -24,7 +24,7 @@ export default function WaitlistCTA({
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [result, setResult] = useState<{ success: boolean; error?: string; referralCode?: string; position?: number } | null>(null);
+  const [result, setResult] = useState<{ success: boolean; error?: string; referralCode?: string; position?: number; isExisting?: boolean } | null>(null);
   const searchParams = useSearchParams();
   const refCode = searchParams.get("ref");
 
@@ -121,7 +121,7 @@ export default function WaitlistCTA({
               <div className="flex items-center justify-center gap-3 mb-2">
                 <CheckCircle className="w-6 h-6 text-secondary" />
                 <span className="text-secondary font-semibold">
-                  You&apos;re in!
+                  {result.isExisting ? "You're already registered!" : "You're in!"}
                 </span>
               </div>
               {result.position && (
