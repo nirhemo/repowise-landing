@@ -32,6 +32,17 @@ export default function FloatingMobileCTA() {
           <div className="bg-slate-900/95 backdrop-blur-md border-t border-slate-800 px-4 py-3 safe-bottom">
             <a
               href="#hero-form"
+              onClick={(e) => {
+                e.preventDefault();
+                const formEl = document.getElementById("hero-form");
+                if (formEl) {
+                  formEl.scrollIntoView({ behavior: "smooth", block: "center" });
+                  setTimeout(() => {
+                    const input = formEl.parentElement?.querySelector<HTMLInputElement>("input[type='email']");
+                    input?.focus();
+                  }, 600);
+                }
+              }}
               className="block w-full text-center px-6 py-3 bg-primary hover:bg-primary-500 text-white font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-primary/25"
             >
               Get Early Access
