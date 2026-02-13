@@ -77,7 +77,18 @@ export default function Navigation() {
             href="#hero-form"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            onClick={() => handleNavClick("cta")}
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavClick("cta");
+              const formEl = document.getElementById("hero-form");
+              if (formEl) {
+                formEl.scrollIntoView({ behavior: "smooth", block: "center" });
+                setTimeout(() => {
+                  const input = formEl.parentElement?.querySelector<HTMLInputElement>("input[type='email']");
+                  input?.focus();
+                }, 600);
+              }
+            }}
             className="inline-flex items-center px-4 py-2 md:px-5 md:py-2.5 bg-primary hover:bg-primary-500 text-white text-sm font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-primary/25"
           >
             Get Early Access
